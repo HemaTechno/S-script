@@ -21,7 +21,10 @@
 
 	
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+	<div class="banner">
+        <img src="https://i.ibb.co/8bvNZ3c/20240926-105409.png" alt="وصف الصورة" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-SCRIPTS</title>
     <style>
         * {
@@ -48,6 +51,34 @@
             justify-content: center; /* لجعل المحتوى في وسط الصفحة عموديًا */
             align-items: center; 
 	}
+	     .banner {
+            background-color: #2c3e50; /* لون خلفية البانر */
+            color: #ffffff; /* لون النص */
+            display: flex; /* استخدام الفليكس لتوزيع العناصر */
+            flex-direction: column; /* جعل العناصر في عمود */
+            align-items: center; /* مركزية العناصر */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px; /* عرض البانر */
+            margin: auto; /* توسيط البانر */
+        }
+
+        .banner img {
+            width: 100%; /* اجعل الصورة تأخذ عرض البانر بالكامل */
+            height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+            border-radius: 10px; /* زوايا دائرية للصورة */
+            margin-bottom: 15px; /* مسافة بين الصورة والنص */
+        }
+
+        .banner h1 {
+            font-size: 1.8em; /* حجم خط العنوان */
+            margin-bottom: 10px; /* مسافة تحت العنوان */
+        }
+
+        .banner p {
+            font-size: 1.1em; /* حجم خط الوصف */
+            text-align: center; /* محاذاة النص إلى الوسط */
+        
 
         .container {
             padding: 20px;
