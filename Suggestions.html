@@ -85,17 +85,6 @@
             background-color: #0056b3;
         }
 
-        .footer a {
-            color: #6ab04c;
-            text-decoration: none;
-            margin: 0 8px;
-            font-size: 12px;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
         /* شريط التنقل السفلي */
         .navbar {
             background-color: #252b39;
@@ -205,7 +194,7 @@
                 suggestionDiv.innerHTML = `
                     <p>${suggestion.text}</p>
                     <button class="like-button" onclick="toggleLike(${index})">
-                        👍 ${suggestion.likes + (likedSuggestions[index] ? 1 : 0)}
+                        👍 ${suggestion.likes}
                     </button>
                     <button class="delete-button" onclick="deleteSuggestion(${index})">حذف الاقتراح</button>
                 `;
@@ -215,18 +204,20 @@
 
         function toggleLike(index) {
             if (likedSuggestions[index]) {
-                likedSuggestions[index] = false; // إزالة الإعجاب
+                // إذا كان المستخدم قد أعجب بالفعل، قم بإلغاء الإعجاب
                 suggestions[index].likes--;
+                likedSuggestions[index] = false;
             } else {
-                // إزالة الإعجاب من الاقتراح السابق
+                // إزالة الإعجاب من الاقتراح السابق إذا كان هناك أي
                 for (let i = 0; i < suggestions.length; i++) {
                     if (likedSuggestions[i]) {
                         suggestions[i].likes--;
                         likedSuggestions[i] = false; // إلغاء الإعجاب السابق
                     }
                 }
-                likedSuggestions[index] = true; // إضافة الإعجاب
+                // إضافة إعجاب جديد
                 suggestions[index].likes++;
+                likedSuggestions[index] = true;
             }
             localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
             localStorage.setItem('suggestions', JSON.stringify(suggestions));
@@ -237,7 +228,8 @@
             const password = prompt('أدخل كلمة السر لحذف الاقتراح:');
             if (password === '2007') {
                 suggestions.splice(index, 1); // حذف الاقتراح
-                likedSuggestions.splice(index, 1); // حذف حالة الإعجاب
+                // تحديث الإعجابات
+                delete likedSuggestions[index]; // حذف حالة الإعجاب
                 localStorage.setItem('suggestions', JSON.stringify(suggestions));
                 localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
                 renderSuggestions();
