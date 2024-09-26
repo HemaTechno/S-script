@@ -38,21 +38,22 @@
         }
 
         .container {
-            background-color: #252b39;
+            background-color: #2c3140;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
         }
 
         .status h1 {
-            font-size: 1.3em;
+            font-size: 1.5em;
             margin-bottom: 8px;
+            color: #f1f1f1;
         }
 
         .status p {
@@ -63,7 +64,7 @@
 
         .key-container {
             background-color: #3a3b58;
-            padding: 10px;
+            padding: 15px;
             border-radius: 8px;
             border: 1px solid #4e4e50;
             margin-bottom: 10px;
@@ -72,6 +73,7 @@
         .key-container p {
             word-wrap: break-word;
             font-size: 14px;
+            color: #e1e1e1;
         }
 
         button {
@@ -81,6 +83,7 @@
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
             transition: background-color 0.3s;
         }
 
@@ -97,18 +100,6 @@
 
         .footer a:hover {
             text-decoration: underline;
-        }
-
-        /* زر الرجوع للصفحة الرئيسية */
-        #backHome {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #FF4757;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         /* شريط التنقل السفلي */
@@ -170,9 +161,6 @@
 <body>
 
     <div id="boxContainer"></div>
-
-    <!-- زر الرجوع للصفحة الرئيسية -->
-    <button id="backHome" onclick="goToHome()">الرجوع إلى الصفحة الرئيسية</button>
 
     <!-- شريط التنقل السفلي -->
     <div class="navbar">
@@ -255,12 +243,7 @@
                 });
         }
 
-        // دالة الانتقال إلى الصفحة الرئيسية
-        function goToHome() {
-            window.location.href = 'index.html'; // عدل الرابط إلى الصفحة الرئيسية
-        }
-
-        // الانتقال إلى المربع المحدد بناءً على الرقم في الرابط
+        // دالة الانتقال إلى المربع المحدد بناءً على الرقم في الرابط
         function scrollToBox() {
             const hash = window.location.hash.substring(1);
             const boxElement = document.getElementById(`box-${hash}`);
