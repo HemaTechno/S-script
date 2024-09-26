@@ -2,7 +2,8 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>صفحة الدردشة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شات Tawk.to</title>
     <style>
         body {
             margin: 0;
@@ -11,33 +12,40 @@
             overflow: hidden; /* منع التمرير */
         }
 
-        /* نمط الزر الرئيسي */
-        .tawk-chat-button {
-            position: fixed; /* ثبات الزر */
-            right: -70px; /* خارج الشاشة عند عدم الاستخدام */
-            bottom: 20px; /* مسافة من الأسفل */
-            width: 60px; /* عرض الزر */
-            height: 60px; /* ارتفاع الزر */
-            background-color: #007bff; /* اللون الخلفي */
+        /* قائمة الدردشة الجانبية */
+        .chat-container {
+            position: fixed;
+            right: -300px; /* بداية خارج الشاشة */
+            top: 0;
+            width: 300px; /* عرض القائمة */
+            height: 100%;
+            background-color: #fff; /* خلفية القائمة */
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* ظل */
+            transition: right 0.3s; /* تأثير الانزلاق */
+            z-index: 9999; /* فوق كل العناصر */
+        }
+
+        /* زر فتح القائمة */
+        .toggle-button {
+            position: fixed;
+            right: 10px; /* من اليمين */
+            bottom: 20px; /* من الأسفل */
+            width: 50px;
+            height: 50px;
+            background-color: #007bff; /* لون الزر */
             color: #fff; /* لون النص */
+            border: none; /* بدون حدود */
             border-radius: 5px; /* زوايا دائرية */
-            transition: right 0.3s ease; /* تأثير الانزلاق */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* ظل خفيف */
             cursor: pointer; /* شكل المؤشر */
+            z-index: 10000; /* فوق كل العناصر */
+            transition: background-color 0.3s;
         }
 
-        /* نمط الزر عند التمرير */
-        .tawk-chat-button:hover {
-            right: 20px; /* تحريك الزر إلى الداخل عند التمرير */
+        .toggle-button:hover {
+            background-color: #0056b3; /* تغيير اللون عند التمرير */
         }
 
-        /* نمط نافذة الدردشة */
-        .tawk-chat-container {
-            border-radius: 10px; /* زوايا دائرية */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* ظل خفيف */
-        }
-        
-        /* نمط الرسائل */
+        /* الرسائل */
         .tawk-message {
             background-color: #f1f1f1; /* خلفية الرسالة */
             color: #333; /* لون النص */
@@ -46,17 +54,36 @@
 </head>
 <body>
 
+    <!-- زر لفتح القائمة -->
+    <button class="toggle-button" onclick="toggleChat()">💬</button>
+
+    <!-- قائمة الدردشة -->
+    <div class="chat-container" id="chatContainer">
+        <!-- هنا سيتم تحميل واجهة Tawk.to -->
+        <div id="tawkToContainer"></div>
+    </div>
+
     <!-- Start of Tawk.to Script -->
     <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/660c1029a0c6737bd1276b66/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/660c1029a0c6737bd1276b66/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
+
+        // دالة لتبديل عرض القائمة
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            if (chatContainer.style.right === '0px') {
+                chatContainer.style.right = '-300px'; // إخفاء القائمة
+            } else {
+                chatContainer.style.right = '0px'; // إظهار القائمة
+            }
+        }
     </script>
     <!-- End of Tawk.to Script -->
 
