@@ -158,7 +158,8 @@
         const suggestionInput = document.getElementById('suggestionInput');
         const submitSuggestion = document.getElementById('submitSuggestion');
 
-        let suggestions = [];
+        let suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
+        let likedSuggestions = JSON.parse(localStorage.getItem('likedSuggestions')) || {};
 
         function renderSuggestions() {
             suggestionContainer.innerHTML = '';
@@ -167,14 +168,24 @@
                 suggestionDiv.classList.add('suggestion');
                 suggestionDiv.innerHTML = `
                     <p>${suggestion.text}</p>
-                    <button class="like-button" onclick="likeSuggestion(${index})">👍 ${suggestion.likes}</button>
+                    <button class="like-button" onclick="toggleLike(${index})">
+                        👍 ${suggestion.likes + (likedSuggestions[index] ? 1 : 0)}
+                    </button>
                 `;
                 suggestionContainer.appendChild(suggestionDiv);
             });
         }
 
-        function likeSuggestion(index) {
-            suggestions[index].likes++;
+        function toggleLike(index) {
+            if (likedSuggestions[index]) {
+                likedSuggestions[index] = false; // إزالة الإعجاب
+                suggestions[index].likes--;
+            } else {
+                likedSuggestions[index] = true; // إضافة الإعجاب
+                suggestions[index].likes++;
+            }
+            localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
+            localStorage.setItem('suggestions', JSON.stringify(suggestions));
             renderSuggestions();
         }
 
@@ -183,11 +194,15 @@
             if (text) {
                 suggestions.push({ text, likes: 0 });
                 suggestionInput.value = '';
+                localStorage.setItem('suggestions', JSON.stringify(suggestions));
                 renderSuggestions();
             } else {
                 alert('يرجى كتابة اقتراح.');
             }
         });
+
+        // عرض الاقتراحات عند تحميل الصفحة
+        renderSuggestions();
     </script>
 
 </body>
