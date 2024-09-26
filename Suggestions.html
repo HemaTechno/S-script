@@ -35,15 +35,34 @@
 
         async function addSuggestion() {
             const suggestionText = document.getElementById('suggestionInput').value;
-            await fetch('/suggestions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: suggestionText }),
-            });
-            document.getElementById('suggestionInput').value = '';
-            fetchSuggestions();
+            
+            // تحقق مما إذا كان حقل الإدخال فارغًا
+            if (!suggestionText.trim()) {
+                alert('الرجاء إدخال اقتراح!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/suggestions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: suggestionText }),
+                });
+
+                // تحقق مما إذا كانت الاستجابة ناجحة
+                if (response.ok) {
+                    document.getElementById('suggestionInput').value = '';
+                    alert('تم حفظ الاقتراح بنجاح!');
+                    fetchSuggestions();
+                } else {
+                    alert('فشل في حفظ الاقتراح. حاول مرة أخرى.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('حدث خطأ. حاول مرة أخرى.');
+            }
         }
 
         async function likeSuggestion(id) {
