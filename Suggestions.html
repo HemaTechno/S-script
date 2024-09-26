@@ -69,7 +69,7 @@
             margin: 10px 0;
         }
 
-        .like-button {
+        .like-button, .delete-button {
             background-color: #007bff;
             color: white;
             border: none;
@@ -81,7 +81,7 @@
             margin-top: 10px;
         }
 
-        .like-button:hover {
+        .like-button:hover, .delete-button:hover {
             background-color: #0056b3;
         }
 
@@ -131,7 +131,7 @@
         }
 
         input[type="text"] {
-            width: calc(100% - 22px); /* لتفادي تداخل الحدود */
+            width: calc(100% - 22px);
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -207,6 +207,7 @@
                     <button class="like-button" onclick="toggleLike(${index})">
                         👍 ${suggestion.likes + (likedSuggestions[index] ? 1 : 0)}
                     </button>
+                    <button class="delete-button" onclick="deleteSuggestion(${index})">حذف الاقتراح</button>
                 `;
                 suggestionContainer.appendChild(suggestionDiv);
             });
@@ -230,6 +231,19 @@
             localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
             localStorage.setItem('suggestions', JSON.stringify(suggestions));
             renderSuggestions();
+        }
+
+        function deleteSuggestion(index) {
+            const password = prompt('أدخل كلمة السر لحذف الاقتراح:');
+            if (password === '2007') {
+                suggestions.splice(index, 1); // حذف الاقتراح
+                likedSuggestions.splice(index, 1); // حذف حالة الإعجاب
+                localStorage.setItem('suggestions', JSON.stringify(suggestions));
+                localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
+                renderSuggestions();
+            } else {
+                alert('كلمة السر غير صحيحة!');
+            }
         }
 
         submitSuggestion.addEventListener('click', () => {
