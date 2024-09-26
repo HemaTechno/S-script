@@ -33,6 +33,16 @@
             align-items: center;
         }
 
+        #suggestionInputContainer {
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto;
+            background-color: #2c3140;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
         #suggestionContainer {
             display: flex;
             flex-direction: column;
@@ -118,16 +128,39 @@
         .navbar-item:hover {
             color: #007bff;
         }
+
+        input[type="text"] {
+            width: calc(100% - 22px); /* لتفادي تداخل الحدود */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 
-    <div id="suggestionContainer"></div>
-
-    <div style="max-width: 600px; width: 100%; margin: 20px auto;">
-        <input type="text" id="suggestionInput" placeholder="اكتب اقتراحك هنا..." style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
-        <button id="submitSuggestion" style="margin-top: 10px; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">إضافة اقتراح</button>
+    <div id="suggestionInputContainer">
+        <input type="text" id="suggestionInput" placeholder="اكتب اقتراحك هنا...">
+        <button id="submitSuggestion">إضافة اقتراح</button>
     </div>
+
+    <div id="suggestionContainer"></div>
 
     <!-- شريط التنقل السفلي -->
     <div class="navbar">
@@ -162,6 +195,8 @@
         let likedSuggestions = JSON.parse(localStorage.getItem('likedSuggestions')) || {};
 
         function renderSuggestions() {
+            // ترتيب الاقتراحات حسب عدد الإعجابات
+            suggestions.sort((a, b) => b.likes - a.likes);
             suggestionContainer.innerHTML = '';
             suggestions.forEach((suggestion, index) => {
                 const suggestionDiv = document.createElement('div');
@@ -181,6 +216,13 @@
                 likedSuggestions[index] = false; // إزالة الإعجاب
                 suggestions[index].likes--;
             } else {
+                // التحقق من عدم وجود إعجاب سابق
+                for (let i = 0; i < suggestions.length; i++) {
+                    if (likedSuggestions[i]) {
+                        suggestions[i].likes--;
+                        likedSuggestions[i] = false; // إلغاء الإعجاب السابق
+                    }
+                }
                 likedSuggestions[index] = true; // إضافة الإعجاب
                 suggestions[index].likes++;
             }
