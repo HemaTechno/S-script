@@ -78,6 +78,7 @@
             cursor: pointer;
             font-size: 14px;
             transition: background-color 0.3s;
+            margin-top: 10px;
         }
 
         .like-button:hover {
@@ -216,7 +217,7 @@
                 likedSuggestions[index] = false; // إزالة الإعجاب
                 suggestions[index].likes--;
             } else {
-                // التحقق من عدم وجود إعجاب سابق
+                // إزالة الإعجاب من الاقتراح السابق
                 for (let i = 0; i < suggestions.length; i++) {
                     if (likedSuggestions[i]) {
                         suggestions[i].likes--;
