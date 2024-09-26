@@ -1,74 +1,56 @@
-// server.js
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const fs = require('fs');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// اتصال بقاعدة البيانات
-mongoose.connect('mongodb+srv://Arabm:Arabm@cluster0.rakl4qh.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
-// نموذج الاقتراح
-const suggestionSchema = new mongoose.Schema({
-    text: String,
-    likes: { type: Number, default: 0 },
-    likedBy: { type: [String], default: [] }, // لتخزين المستخدمين الذين أعجبوا بالاقتراح
-});
-
-const Suggestion = mongoose.model('Suggestion', suggestionSchema);
-
-// إعدادات الجسم
 app.use(bodyParser.json());
-app.use(express.static('public')); // لخدمة الملفات الثابتة
 
-// نقطة النهاية لإضافة اقتراح
-app.post('/suggestions', async (req, res) => {
+// قراءة الاقتراحات من ملف JSON
+const readSuggestions = () => {
+    const data = fs.readFileSync('suggestions.json');
+    return JSON.parse(data);
+};
+
+// حفظ الاقتراحات في ملف JSON
+const saveSuggestions = (suggestions) => {
+    fs.writeFileSync('suggestions.json', JSON.stringify({ suggestions }, null, 2));
+};
+
+// إضافة اقتراح جديد
+app.post('/suggestions', (req, res) => {
     const { text } = req.body;
-    const newSuggestion = new Suggestion({ text });
-    await newSuggestion.save();
-    res.status(201).send(newSuggestion);
+
+    if (!text) {
+        return res.status(400).json({ message: 'نص الاقتراح مطلوب' });
+    }
+
+    const suggestions = readSuggestions();
+    const newSuggestion = { text, likes: 0 };
+    suggestions.push(newSuggestion);
+
+    saveSuggestions(suggestions);
+    res.status(201).json({ message: 'تم حفظ الاقتراح بنجاح!' });
 });
 
-// نقطة النهاية للحصول على الاقتراحات
-app.get('/suggestions', async (req, res) => {
-    const suggestions = await Suggestion.find().sort({ likes: -1 }); // ترتيب الاقتراحات حسب عدد الإعجابات
-    res.send(suggestions);
+// الحصول على الاقتراحات
+app.get('/suggestions', (req, res) => {
+    const suggestions = readSuggestions();
+    res.json(suggestions);
 });
 
-// نقطة النهاية للإعجاب بالاقتراح
-app.post('/suggestions/:id/like', async (req, res) => {
-    const suggestionId = req.params.id;
-    const userId = req.body.userId; // يتطلب معرف المستخدم
+// إضافة مثل للاقتراح
+app.post('/suggestions/:index/like', (req, res) => {
+    const index = req.params.index;
 
-    const suggestion = await Suggestion.findById(suggestionId);
-    if (!suggestion) return res.status(404).send('Suggestion not found.');
-
-    // تحقق مما إذا كان المستخدم قد أعجب بالفعل
-    if (!suggestion.likedBy.includes(userId)) {
-        suggestion.likes++;
-        suggestion.likedBy.push(userId);
-    } else {
-        suggestion.likes--;
-        suggestion.likedBy = suggestion.likedBy.filter(id => id !== userId);
+    const suggestions = readSuggestions();
+    if (suggestions[index]) {
+        suggestions[index].likes += 1;
+        saveSuggestions(suggestions);
+        return res.json(suggestions[index]);
     }
     
-    await suggestion.save();
-    res.send(suggestion);
-});
-
-// نقطة النهاية لحذف الاقتراح
-app.delete('/suggestions/:id', async (req, res) => {
-    const suggestionId = req.params.id;
-    const password = req.body.password; // الحصول على كلمة المرور من الطلب
-
-    if (password !== '2007') return res.status(403).send('Incorrect password.');
-
-    await Suggestion.findByIdAndDelete(suggestionId);
-    res.send('Suggestion deleted.');
+    res.status(404).json({ message: 'الاقتراح غير موجود' });
 });
 
 // بدء الخادم
