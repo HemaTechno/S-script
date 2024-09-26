@@ -203,21 +203,15 @@
         }
 
         function toggleLike(index) {
+            // التحقق مما إذا كان المستخدم قد أعجب بالفعل بهذا الاقتراح
             if (likedSuggestions[index]) {
-                // إذا كان المستخدم قد أعجب بالفعل، قم بإلغاء الإعجاب
+                // إذا كان قد أعجب بالفعل، نقوم بإلغاء الإعجاب
                 suggestions[index].likes--;
-                likedSuggestions[index] = false;
+                likedSuggestions[index] = false; // إلغاء الإعجاب
             } else {
-                // إزالة الإعجاب من الاقتراح السابق إذا كان هناك أي
-                for (let i = 0; i < suggestions.length; i++) {
-                    if (likedSuggestions[i]) {
-                        suggestions[i].likes--;
-                        likedSuggestions[i] = false; // إلغاء الإعجاب السابق
-                    }
-                }
                 // إضافة إعجاب جديد
                 suggestions[index].likes++;
-                likedSuggestions[index] = true;
+                likedSuggestions[index] = true; // تعيين الإعجاب
             }
             localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
             localStorage.setItem('suggestions', JSON.stringify(suggestions));
