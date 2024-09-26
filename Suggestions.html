@@ -1,50 +1,79 @@
-// تعديل وظائف الاسترجاع، الإضافة، الإعجاب، والحذف لتكون متصلة بالخادم
-const apiUrl = 'http://localhost:5000/suggestions';
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اقتراحات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>أضف اقتراحك</h1>
+    <textarea id="suggestionInput" placeholder="اكتب اقتراحك هنا..."></textarea>
+    <button id="addSuggestionBtn">إضافة الاقتراح</button>
+    
+    <h2>الاقتراحات</h2>
+    <div id="suggestionList"></div>
 
-async function renderSuggestions() {
-    const response = await fetch(apiUrl);
-    const suggestions = await response.json();
-    suggestionContainer.innerHTML = '';
-    suggestions.forEach((suggestion) => {
-        const suggestionDiv = document.createElement('div');
-        suggestionDiv.classList.add('suggestion');
-        suggestionDiv.innerHTML = `
-            <p>${suggestion.text}</p>
-            <button class="like-button" onclick="toggleLike('${suggestion._id}')">
-                👍 ${suggestion.likes}
-            </button>
-            <button class="delete-button" onclick="deleteSuggestion('${suggestion._id}')">حذف الاقتراح</button>
-        `;
-        suggestionContainer.appendChild(suggestionDiv);
-    });
-}
+    <script>
+        async function fetchSuggestions() {
+            const response = await fetch('/suggestions');
+            const suggestions = await response.json();
+            const suggestionList = document.getElementById('suggestionList');
+            suggestionList.innerHTML = '';
 
-async function submitSuggestion() {
-    const text = suggestionInput.value.trim();
-    if (text) {
-        await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text })
-        });
-        suggestionInput.value = '';
-        renderSuggestions();
-    } else {
-        alert('يرجى كتابة اقتراح.');
-    }
-}
+            suggestions.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.innerHTML = `
+                    <p>${suggestion.text}</p>
+                    <p>Likes: <span id="likes-${suggestion._id}">${suggestion.likes}</span></p>
+                    <button onclick="likeSuggestion('${suggestion._id}')">👍</button>
+                    <button onclick="deleteSuggestion('${suggestion._id}')">حذف</button>
+                `;
+                suggestionList.appendChild(suggestionItem);
+            });
+        }
 
-async function toggleLike(id) {
-    await fetch(`${apiUrl}/${id}/like`, { method: 'PUT' });
-    renderSuggestions();
-}
+        async function addSuggestion() {
+            const suggestionText = document.getElementById('suggestionInput').value;
+            await fetch('/suggestions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: suggestionText }),
+            });
+            document.getElementById('suggestionInput').value = '';
+            fetchSuggestions();
+        }
 
-async function deleteSuggestion(id) {
-    const password = prompt('أدخل كلمة السر لحذف الاقتراح:');
-    if (password === '2007') {
-        await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
-        renderSuggestions();
-    } else {
-        alert('كلمة السر غير صحيحة!');
-    }
-}
+        async function likeSuggestion(id) {
+            const userId = 'user1'; // استخدم معرف المستخدم الخاص بك هنا
+            await fetch(`/suggestions/${id}/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId }),
+            });
+            fetchSuggestions();
+        }
+
+        async function deleteSuggestion(id) {
+            const password = prompt('أدخل كلمة المرور لحذف الاقتراح:');
+            if (password) {
+                await fetch(`/suggestions/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password }),
+                });
+                fetchSuggestions();
+            }
+        }
+
+        document.getElementById('addSuggestionBtn').addEventListener('click', addSuggestion);
+        fetchSuggestions(); // جلب الاقتراحات عند تحميل الصفحة
+    </script>
+</body>
+</html>
