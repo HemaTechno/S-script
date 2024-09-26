@@ -28,10 +28,11 @@
             color: #fff;
             direction: rtl;
             text-align: right;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* لجعل المحتوى في وسط الصفحة عموديًا */
+            align-items: center; /* لجعل المحتوى في وسط الصفحة أفقيًا */
         }
 
         #boxContainer {
@@ -39,9 +40,10 @@
             flex-direction: column;
             gap: 20px;
             padding: 20px;
-            flex-grow: 1;
             max-width: 400px;
-            margin: auto;
+            margin: 0 auto;
+            justify-content: center; /* التوسيط العمودي للمربعات */
+            align-items: center; /* التوسيط الأفقي للمربعات */
         }
 
         .container {
@@ -129,6 +131,7 @@
             align-items: center;
             color: #7a7a7a;
             font-size: 12px;
+            text-decoration: none; /* إلغاء الخطوط تحت النص */
             transition: color 0.3s ease;
         }
 
@@ -180,7 +183,7 @@
             <span>سكربتات يوتيوب</span>
         </a>
         <button class="add-btn">🏠</button>
-        <a href="index.html" class="navbar-item">
+        <a href="messages.html" class="navbar-item">
             <i class="navbar-icon">👾</i>
             <span>هاكات</span>
         </a>
@@ -250,23 +253,14 @@
                 });
         }
 
-        // دالة الانتقال إلى المربع المحدد بناءً على الرقم في الرابط
-        function scrollToBox() {
-            const hash = window.location.hash.substring(1);
-            const boxElement = document.getElementById(`box-${hash}`);
-            if (boxElement) {
-                boxElement.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
         // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
         fetch('Script.json')
             .then(response => response.json())
             .then(data => {
                 createBoxes(data);
-                scrollToBox(); // الانتقال إلى المربع المحدد عند تحميل الصفحة
             })
             .catch(error => console.error('Error loading data:', error));
     </script>
+
 </body>
 </html>
