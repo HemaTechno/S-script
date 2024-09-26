@@ -1,250 +1,50 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="صفحة اقتراحات">
-    <meta name="keywords" content="اقتراحات, أفكار, مجتمع">
-    <meta name="author" content="Hema_Tech1">
-    <title>صفحة الاقتراحات</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+// تعديل وظائف الاسترجاع، الإضافة، الإعجاب، والحذف لتكون متصلة بالخادم
+const apiUrl = 'http://localhost:5000/suggestions';
 
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 5;
-        }
+async function renderSuggestions() {
+    const response = await fetch(apiUrl);
+    const suggestions = await response.json();
+    suggestionContainer.innerHTML = '';
+    suggestions.forEach((suggestion) => {
+        const suggestionDiv = document.createElement('div');
+        suggestionDiv.classList.add('suggestion');
+        suggestionDiv.innerHTML = `
+            <p>${suggestion.text}</p>
+            <button class="like-button" onclick="toggleLike('${suggestion._id}')">
+                👍 ${suggestion.likes}
+            </button>
+            <button class="delete-button" onclick="deleteSuggestion('${suggestion._id}')">حذف الاقتراح</button>
+        `;
+        suggestionContainer.appendChild(suggestionDiv);
+    });
+}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1e27;
-            color: #fff;
-            direction: rtl;
-            text-align: right;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #suggestionInputContainer {
-            max-width: 600px;
-            width: 100%;
-            margin: 20px auto;
-            background-color: #2c3140;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        #suggestionContainer {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        .suggestion {
-            background-color: #2c3140;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .suggestion:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-        }
-
-        .suggestion p {
-            margin: 10px 0;
-        }
-
-        .like-button, .delete-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .like-button:hover, .delete-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* شريط التنقل السفلي */
-        .navbar {
-            background-color: #252b39;
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 70px;
-            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
-            padding: 0 20px;
-        }
-
-        .navbar-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #7a7a7a;
-            font-size: 12px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-item i {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .navbar-item.active,
-        .navbar-item:hover {
-            color: #007bff;
-        }
-
-
-        input[type="text"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="suggestionInputContainer">
-        <input type="text" id="suggestionInput" placeholder="اكتب اقتراحك هنا...">
-        <button id="submitSuggestion">إضافة اقتراح</button>
-    </div>
-
-    <div id="suggestionContainer"></div>
-
-    <!-- شريط التنقل السفلي -->
-    <div class="navbar">
-        <a href="Public-Scripts.html" class="navbar-item">
-            <i class="navbar-icon">🌐</i>
-            <span>سكربتات</span>
-        </a>
-        <a href="Scripts.html" class="navbar-item">
-            <i class="navbar-icon">🗂️</i>
-            <span> يوتيوب</span>
-        </a>
-        <button class="add-btn">🏠</button>
-        <a href="Hack.html" class="navbar-item">
-            <i class="navbar-icon">👾</i>
-            <span>هاكات</span>
-        </a>
-        <a href="Suggestions.html" class="navbar-item">
-            <i class="navbar-icon">📊</i>
-            <span>الاقتراحات</span>
-        </a>
-    </div>
-
-    <script>
-        const suggestionContainer = document.getElementById('suggestionContainer');
-        const suggestionInput = document.getElementById('suggestionInput');
-        const submitSuggestion = document.getElementById('submitSuggestion');
-
-        let suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
-        let likedSuggestions = JSON.parse(localStorage.getItem('likedSuggestions')) || {};
-
-        function renderSuggestions() {
-            // ترتيب الاقتراحات حسب عدد الإعجابات
-            suggestions.sort((a, b) => b.likes - a.likes);
-            suggestionContainer.innerHTML = '';
-            suggestions.forEach((suggestion, index) => {
-                const suggestionDiv = document.createElement('div');
-                suggestionDiv.classList.add('suggestion');
-                suggestionDiv.innerHTML = `
-                    <p>${suggestion.text}</p>
-                    <button class="like-button" onclick="toggleLike(${index})">
-                        👍 ${suggestion.likes}
-                    </button>
-                    <button class="delete-button" onclick="deleteSuggestion(${index})">حذف الاقتراح</button>
-                `;
-                suggestionContainer.appendChild(suggestionDiv);
-            });
-        }
-
-        function toggleLike(index) {
-            // التحقق مما إذا كان المستخدم قد أعجب بالفعل بهذا الاقتراح
-            if (likedSuggestions[index]) {
-                // إذا كان قد أعجب بالفعل، نقوم بإلغاء الإعجاب
-                suggestions[index].likes--;
-                likedSuggestions[index] = false; // إلغاء الإعجاب
-            } else {
-                // إضافة إعجاب جديد
-                suggestions[index].likes++;
-                likedSuggestions[index] = true; // تعيين الإعجاب
-            }
-            localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
-            localStorage.setItem('suggestions', JSON.stringify(suggestions));
-            renderSuggestions();
-        }
-
-        function deleteSuggestion(index) {
-            const password = prompt('أدخل كلمة السر لحذف الاقتراح:');
-            if (password === '2007') {
-                suggestions.splice(index, 1); // حذف الاقتراح
-                // تحديث الإعجابات
-                delete likedSuggestions[index]; // حذف حالة الإعجاب
-                localStorage.setItem('suggestions', JSON.stringify(suggestions));
-                localStorage.setItem('likedSuggestions', JSON.stringify(likedSuggestions));
-                renderSuggestions();
-            } else {
-                alert('كلمة السر غير صحيحة!');
-            }
-        }
-
-        submitSuggestion.addEventListener('click', () => {
-            const text = suggestionInput.value.trim();
-            if (text) {
-                suggestions.push({ text, likes: 0 });
-                suggestionInput.value = '';
-                localStorage.setItem('suggestions', JSON.stringify(suggestions));
-                renderSuggestions();
-            } else {
-                alert('يرجى كتابة اقتراح.');
-            }
+async function submitSuggestion() {
+    const text = suggestionInput.value.trim();
+    if (text) {
+        await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text })
         });
-
-        // عرض الاقتراحات عند تحميل الصفحة
+        suggestionInput.value = '';
         renderSuggestions();
-    </script>
+    } else {
+        alert('يرجى كتابة اقتراح.');
+    }
+}
 
-</body>
-</html>
+async function toggleLike(id) {
+    await fetch(`${apiUrl}/${id}/like`, { method: 'PUT' });
+    renderSuggestions();
+}
+
+async function deleteSuggestion(id) {
+    const password = prompt('أدخل كلمة السر لحذف الاقتراح:');
+    if (password === '2007') {
+        await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+        renderSuggestions();
+    } else {
+        alert('كلمة السر غير صحيحة!');
+    }
+}
