@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
+    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
+    <meta name="author" content="Hema_Tech1">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1135848559607021680/1286131920039579658/20240918_221032.jpg?ex=66eccb30&is=66eb79b0&hm=7b5976954e142b8700d8b28b810d6450e2569109ff455be3dda0b7e2453101f0&">
+    <title>Scripts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1e27;
+            color: #fff;
+            direction: rtl;
+            text-align: right;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #boxContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .container {
+            background-color: #252b39;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .status h1 {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .status p {
+            font-size: 1.1em;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+        }
+
+        .key-container {
+            background-color: #3a3b58;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #4e4e50;
+            margin-bottom: 10px;
+        }
+
+        .key-container p {
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer a {
+            color: #6ab04c;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 12px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* زر الرجوع للصفحة الرئيسية */
+        #backHome {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #FF4757;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* شريط التنقل السفلي */
+        .navbar {
+            background-color: #252b39;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #7a7a7a;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-item i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .navbar-item.active,
+        .navbar-item:hover {
+            color: #007bff;
+        }
+
+        .add-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: -40px;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="boxContainer"></div>
+
+    <!-- زر الرجوع للصفحة الرئيسية -->
+    <button id="backHome" onclick="goToHome()">الرجوع إلى الصفحة الرئيسية</button>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="navbar">
+        <a href="home.html" class="navbar-item">
+            <i class="navbar-icon">🌐</i>
+            <span>سكربتات</span>
+        </a>
+        <a href="projects.html" class="navbar-item">
+            <i class="navbar-icon">🗂️</i>
+            <span>سكربتات يوتيوب</span>
+        </a>
+        <button class="add-btn">🏠</button>
+        <a href="messages.html" class="navbar-item">
+            <i class="navbar-icon">👾</i>
+            <span>هاكات</span>
+        </a>
+        <a href="profile.html" class="navbar-item">
+            <i class="navbar-icon">❕</i>
+            <span>التواصل</span>
+        </a>
+    </div>
+
+    <script>
+        // الدالة التي تضيف المربعات إلى الصفحة
+        function createBoxes(data) {
+            const boxContainer = document.getElementById('boxContainer');
+
+            data.forEach(box => {
+                const container = document.createElement('div');
+                container.classList.add('container');
+                container.id = `box-${box.id}`;  // إضافة معرف فريد لكل مربع
+
+                container.innerHTML = `
+                    <div class="status">
+                        <h1>${box.title}</h1>
+                        <p>${box.description}</p>
+                    </div>
+                    <div class="key-container">
+                        <p id="script-${box.id}">${box.scriptText}</p>
+                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                        <button onclick="shareBox('${box.id}')">مشاركة</button> <!-- زر المشاركة -->
+                    </div>
+                    <div class="footer">
+                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
+                        <a href="${box.youtubeLink}">YouTube</a>
+                        <a href="https://t.me/hematech_1">Telegram</a>
+                    </div>
+                `;
+
+                boxContainer.appendChild(container);
+            });
+        }
+
+        // دالة لنسخ نص السكربت إلى الحافظة وإظهار إشعار
+        function copyScriptText(id) {
+            const scriptTextElement = document.getElementById(`script-${id}`);
+            const scriptText = scriptTextElement.textContent;
+
+            navigator.clipboard.writeText(scriptText)
+                .then(() => {
+                    alert('تم نسخ السكربت بنجاح');
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ السكربت: ', err);
+                    alert('فشل في نسخ السكربت. حاول مجدداً.');
+                });
+        }
+
+        // دالة لنسخ رابط الموقع مع رقم المربع
+        function shareBox(id) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert(`تم نسخ الرابط: ${url}`);
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ الرابط: ', err);
+                    alert('فشل في نسخ الرابط. حاول مجدداً.');
+                });
+        }
+
+        // دالة الانتقال إلى الصفحة الرئيسية
+        function goToHome() {
+            window.location.href = 'index.html'; // عدل الرابط إلى الصفحة الرئيسية
+        }
+
+        // الانتقال إلى المربع المحدد بناءً على الرقم في الرابط
+        function scrollToBox() {
+            const hash = window.location.hash.substring(1);
+            const boxElement = document.getElementById(`box-${hash}`);
+            if (boxElement) {
+                boxElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
+        fetch('Script.json')
+            .then(response => response.json())
+            .then(data => {
+                createBoxes(data);
+                scrollToBox(); // الانتقال إلى المربع المحدد عند تحميل الصفحة
+            })
+            .catch(error => console.error('Error loading data:', error));
+    </script>
+
+</body>
+</html>
