@@ -19,7 +19,7 @@
     overflow-x: hidden; /* منع التحرك الأفقي */
     width: 100%;
     margin: 0;
-    padding: 5;
+    padding: 0;
     }
 
 
@@ -40,11 +40,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px; /* المسافة بين المربعات */
-    padding: 20px 0; /* المسافة من الأعلى والأسفل فقط */
-    max-width: 400px; /* عرض الحاوية */
-    margin: 0 auto; /* توسيط الحاوية أفقياً */
-    justify-content: center; /* التوسيع العمودي للمربعات */
-    align-items: center; /* التوسيع الأفقي للمربعات */
+    padding: 20px; /* المسافة من الأعلى والأسفل والجوانب */
+    width: 100%; /* جعل الحاوية بعرض الشاشة بالكامل */
+    margin: 0; /* إزالة الهوامش */
 }
 
 .container {
@@ -55,7 +53,10 @@
     transition: transform 0.3s, box-shadow 0.3s;
     width: 100%; /* اجعل المربعات تأخذ عرض الحاوية بالكامل */
     margin: 0; /* إزالة أي هوامش إضافية */
+    /* تضمن أن المربعات تكون داخل الحواف */
+    max-width: 100%; /* تأكد من أن العرض لا يتجاوز 100% */
 }
+
 
 
 
