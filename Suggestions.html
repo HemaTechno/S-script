@@ -3,96 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اقتراحات</title>
-    <link rel="stylesheet" href="style.css">
+    <title>نظام الاقتراحات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: right;
+        }
+        h1 {
+            color: #333;
+        }
+        #suggestionForm {
+            margin-bottom: 20px;
+        }
+        #suggestionsList {
+            list-style-type: none;
+            padding: 0;
+        }
+        .suggestionItem {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .likeButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>أضف اقتراحك</h1>
-    <textarea id="suggestionInput" placeholder="اكتب اقتراحك هنا..."></textarea>
-    <button id="addSuggestionBtn">إضافة الاقتراح</button>
-    
-    <h2>الاقتراحات</h2>
-    <div id="suggestionList"></div>
+
+    <h1>نظام الاقتراحات</h1>
+    <form id="suggestionForm">
+        <input type="text" id="suggestionInput" placeholder="اكتب اقتراحك هنا" required>
+        <button type="submit">إضافة اقتراح</button>
+    </form>
+
+    <ul id="suggestionsList"></ul>
 
     <script>
-        async function fetchSuggestions() {
-            const response = await fetch('/suggestions');
-            const suggestions = await response.json();
-            const suggestionList = document.getElementById('suggestionList');
-            suggestionList.innerHTML = '';
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSuggestions();
 
-            suggestions.forEach(suggestion => {
-                const suggestionItem = document.createElement('div');
-                suggestionItem.innerHTML = `
-                    <p>${suggestion.text}</p>
-                    <p>Likes: <span id="likes-${suggestion._id}">${suggestion.likes}</span></p>
-                    <button onclick="likeSuggestion('${suggestion._id}')">👍</button>
-                    <button onclick="deleteSuggestion('${suggestion._id}')">حذف</button>
-                `;
-                suggestionList.appendChild(suggestionItem);
-            });
-        }
+            const form = document.getElementById('suggestionForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const suggestionText = document.getElementById('suggestionInput').value;
 
-        async function addSuggestion() {
-            const suggestionText = document.getElementById('suggestionInput').value;
-            
-            // تحقق مما إذا كان حقل الإدخال فارغًا
-            if (!suggestionText.trim()) {
-                alert('الرجاء إدخال اقتراح!');
-                return;
-            }
+                try {
+                    const response = await fetch('http://localhost:3000/suggestions', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: suggestionText })
+                    });
 
-            try {
-                const response = await fetch('/suggestions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ text: suggestionText }),
-                });
-
-                // تحقق مما إذا كانت الاستجابة ناجحة
-                if (response.ok) {
-                    document.getElementById('suggestionInput').value = '';
+                    if (!response.ok) throw new Error('فشل في حفظ الاقتراح');
+                    
                     alert('تم حفظ الاقتراح بنجاح!');
-                    fetchSuggestions();
-                } else {
-                    alert('فشل في حفظ الاقتراح. حاول مرة أخرى.');
+                    document.getElementById('suggestionInput').value = '';
+                    loadSuggestions();
+                } catch (error) {
+                    alert(error.message);
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('حدث خطأ. حاول مرة أخرى.');
-            }
-        }
-
-        async function likeSuggestion(id) {
-            const userId = 'user1'; // استخدم معرف المستخدم الخاص بك هنا
-            await fetch(`/suggestions/${id}/like`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userId }),
             });
-            fetchSuggestions();
+        });
+
+        async function loadSuggestions() {
+            const response = await fetch('http://localhost:3000/suggestions');
+            const data = await response.json();
+            const suggestionsList = document.getElementById('suggestionsList');
+            suggestionsList.innerHTML = '';
+
+            data.suggestions.forEach((suggestion, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'suggestionItem';
+                listItem.innerHTML = `
+                    <span>${suggestion.text} (لايكات: ${suggestion.likes})</span>
+                    <button class="likeButton" onclick="likeSuggestion(${index})">إعجاب</button>
+                `;
+                suggestionsList.appendChild(listItem);
+            });
         }
 
-        async function deleteSuggestion(id) {
-            const password = prompt('أدخل كلمة المرور لحذف الاقتراح:');
-            if (password) {
-                await fetch(`/suggestions/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ password }),
-                });
-                fetchSuggestions();
-            }
+        async function likeSuggestion(index) {
+            await fetch(`http://localhost:3000/suggestions/${index}/like`, {
+                method: 'POST'
+            });
+            loadSuggestions();
         }
-
-        document.getElementById('addSuggestionBtn').addEventListener('click', addSuggestion);
-        fetchSuggestions(); // جلب الاقتراحات عند تحميل الصفحة
     </script>
+
 </body>
 </html>
