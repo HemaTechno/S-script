@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1097726"></script>
+<script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1097724"></script>
+
+
+	
+ <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1097722"></script>
+	
+<script type="text/javascript" async src="https://platform.foremedia.net/code/54124/analytics"></script>
+
+
+    <meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
+    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1135848559607021680/1286131920039579658/20240918_221032.jpg?ex=66eccb30&is=66eb79b0&hm=7b5976954e142b8700d8b28b810d6450e2569109ff455be3dda0b7e2453101f0&">
+    <meta name="author" content="Hema_Tech1">
+
+
+
+
+<meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
+    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1135848559607021680/1286131920039579658/20240918_221032.jpg?ex=66eccb30&is=66eb79b0&hm=7b5976954e142b8700d8b28b810d6450e2569109ff455be3dda0b7e2453101f0&">
+    <meta name="author" content="Hema_Tech1">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #10121b;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 0.5rem;
+            position: relative;
+        }
+        #boxContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 360px;
+        }
+        .container {
+            background-color: #1a1c2d;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            border: 1px solid #3a3b58;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+        .status h1 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #f1f1f1;
+        }
+        .status p {
+            font-size: 14px;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+        }
+        .icon {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ffffff;
+        }
+        .key-container {
+            background-color: #27293d;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #4e4e50;
+            margin-bottom: 10px;
+        }
+        .key-container p {
+            font-size: 12px;
+            word-wrap: break-word;
+            color: #e1e1e1;
+        }
+        button {
+            background-color: #ff4757;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e84118;
+        }
+        .footer {
+            margin-top: 15px;
+        }
+        .footer a {
+            color: #6ab04c;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 12px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        /* زر الرجوع للصفحة الرئيسية */
+        #backHome {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #FF4757;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #backHome:hover {
+            background-color: #44bd32;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+	
+    <div id="boxContainer"></div>
+
+    <!-- زر الرجوع للصفحة الرئيسية -->
+    <button id="backHome" onclick="goToHome()">الرجوع إلى الصفحة الرئيسية</button>
+
+    <script>
+        // الدالة التي تضيف المربعات إلى الصفحة
+        function createBoxes(data) {
+            const boxContainer = document.getElementById('boxContainer');
+
+            data.forEach(box => {
+                const container = document.createElement('div');
+                container.classList.add('container');
+                container.id = `box-${box.id}`;  // إضافة معرف فريد لكل مربع
+
+                container.innerHTML = `
+                    <div class="status">
+
+                        <h1>${box.title}</h1>
+                        <p>${box.description}</p>
+                    </div>
+                    <div class="key-container">
+                        <p id="script-${box.id}">${box.scriptText}</p>
+                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                        <button onclick="shareBox('${box.id}')">مشاركة</button> <!-- زر المشاركة -->
+                    </div>
+                    <div class="footer">
+                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
+                        <a href="${box.youtubeLink}">YouTube</a>
+                        <a href="https://t.me/hematech_1">Telegram</a>
+                    </div>
+                `;
+
+                boxContainer.appendChild(container);
+            });
+        }
+
+        // دالة لنسخ نص السكربت إلى الحافظة وإظهار إشعار
+        function copyScriptText(id) {
+            const scriptTextElement = document.getElementById(`script-${id}`);
+            const scriptText = scriptTextElement.textContent;
+
+            navigator.clipboard.writeText(scriptText)
+                .then(() => {
+                    alert('تم نسخ السكربت بنجاح');
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ السكربت: ', err);
+                    alert('فشل في نسخ السكربت. حاول مجدداً.');
+                });
+        }
+
+        // دالة لنسخ رابط الموقع مع رقم المربع
+        function shareBox(id) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert(`تم نسخ الرابط: ${url}`);
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ الرابط: ', err);
+                    alert('فشل في نسخ الرابط. حاول مجدداً.');
+                });
+        }
+
+        // دالة الانتقال إلى الصفحة الرئيسية
+        function goToHome() {
+            window.location.href = 'index.html'; // عدل الرابط إلى الصفحة الرئيسية
+        }
+
+        // الانتقال إلى المربع المحدد بناءً على الرقم في الرابط
+        function scrollToBox() {
+            const hash = window.location.hash.substring(1);
+            const boxElement = document.getElementById(`box-${hash}`);
+            if (boxElement) {
+                boxElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
+        fetch('sc.json')
+            .then(response => response.json())
+            .then(data => {
+                createBoxes(data);
+                scrollToBox(); // الانتقال إلى المربع المحدد عند تحميل الصفحة
+            })
+            .catch(error => console.error('Error loading data:', error));
+    </script>
+</body>
+</html>
