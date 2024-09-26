@@ -2,166 +2,63 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اقتراحات</title>
+    <title>صفحة الدردشة</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1e27;
-            color: #fff;
-            direction: rtl;
-            text-align: right;
-            padding: 20px;
-        }
-        #suggestionContainer {
-            margin-top: 20px;
-        }
-        .suggestion {
-            background-color: #2c3140;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-        }
-        .suggestion h3 {
             margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden; /* منع التمرير */
         }
-        .like-btn, .delete-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 5px;
-            font-size: 12px;
+
+        /* نمط الزر الرئيسي */
+        .tawk-chat-button {
+            position: fixed; /* ثبات الزر */
+            right: -70px; /* خارج الشاشة عند عدم الاستخدام */
+            bottom: 20px; /* مسافة من الأسفل */
+            width: 60px; /* عرض الزر */
+            height: 60px; /* ارتفاع الزر */
+            background-color: #007bff; /* اللون الخلفي */
+            color: #fff; /* لون النص */
+            border-radius: 5px; /* زوايا دائرية */
+            transition: right 0.3s ease; /* تأثير الانزلاق */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* ظل خفيف */
+            cursor: pointer; /* شكل المؤشر */
         }
-        .delete-btn {
-            background-color: #dc3545;
+
+        /* نمط الزر عند التمرير */
+        .tawk-chat-button:hover {
+            right: 20px; /* تحريك الزر إلى الداخل عند التمرير */
         }
-        .add-suggestion {
-            display: flex;
-            margin-bottom: 20px;
+
+        /* نمط نافذة الدردشة */
+        .tawk-chat-container {
+            border-radius: 10px; /* زوايا دائرية */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* ظل خفيف */
         }
-        .add-suggestion input {
-            flex-grow: 1;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-        }
-        .add-suggestion button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        
+        /* نمط الرسائل */
+        .tawk-message {
+            background-color: #f1f1f1; /* خلفية الرسالة */
+            color: #333; /* لون النص */
         }
     </style>
 </head>
 <body>
 
-    <h1>اقتراحاتكم</h1>
-    <div class="add-suggestion">
-        <input type="text" id="suggestionInput" placeholder="اكتب اقتراحك هنا">
-        <button onclick="addSuggestion()">إضافة اقتراح</button>
-    </div>
-
-    <div id="suggestionContainer"></div>
-
-    <script>
-        let suggestions = [];
-        const currentUserId = 'user123'; // معرف المستخدم الحالي
-
-        function loadSuggestions() {
-            fetch('suggestions.json')
-                .then(response => response.json())
-                .then(data => {
-                    suggestions = data;
-                    renderSuggestions();
-                })
-                .catch(error => console.error('فشل في تحميل الاقتراحات:', error));
-        }
-
-        function renderSuggestions() {
-            const suggestionContainer = document.getElementById('suggestionContainer');
-            suggestionContainer.innerHTML = '';
-            suggestions.sort((a, b) => b.likes.length - a.likes.length); // ترتيب الاقتراحات حسب عدد الإعجابات
-            suggestions.forEach(suggestion => {
-                const div = document.createElement('div');
-                div.className = 'suggestion';
-                div.innerHTML = `
-                    <h3>${suggestion.text}</h3>
-                    <button class="like-btn" onclick="toggleLike('${suggestion.id}')">
-                        ${suggestion.likes.includes(currentUserId) ? 'إلغاء الإعجاب' : 'إعجاب'} (${suggestion.likes.length})
-                    </button>
-                    <button class="delete-btn" onclick="deleteSuggestion('${suggestion.id}')">حذف</button>
-                `;
-                suggestionContainer.appendChild(div);
-            });
-        }
-
-        function addSuggestion() {
-            const suggestionInput = document.getElementById('suggestionInput');
-            const text = suggestionInput.value.trim();
-            if (text) {
-                const suggestion = {
-                    id: Date.now().toString(),
-                    text,
-                    likes: []
-                };
-                suggestions.push(suggestion);
-                saveSuggestions();
-                suggestionInput.value = '';
-                renderSuggestions();
-                alert('تم حفظ الاقتراح بنجاح');
-            } else {
-                alert('فشل في حفظ الاقتراح');
-            }
-        }
-
-        function toggleLike(suggestionId) {
-            const suggestion = suggestions.find(s => s.id === suggestionId);
-            if (!suggestion) return;
-
-            const index = suggestion.likes.indexOf(currentUserId);
-            if (index === -1) {
-                // إعجاب
-                suggestion.likes.push(currentUserId);
-            } else {
-                // إلغاء الإعجاب
-                suggestion.likes.splice(index, 1);
-            }
-            saveSuggestions();
-            renderSuggestions();
-        }
-
-        function deleteSuggestion(suggestionId) {
-            const password = prompt('أدخل كلمة المرور للحذف:');
-            if (password === '2007') {
-                suggestions = suggestions.filter(s => s.id !== suggestionId);
-                saveSuggestions();
-                renderSuggestions();
-                alert('تم حذف الاقتراح بنجاح');
-            } else {
-                alert('كلمة المرور خاطئة!');
-            }
-        }
-
-        function saveSuggestions() {
-            const data = JSON.stringify(suggestions);
-            const blob = new Blob([data], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'suggestions.json';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        loadSuggestions();
+    <!-- Start of Tawk.to Script -->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/660c1029a0c6737bd1276b66/default';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
     </script>
+    <!-- End of Tawk.to Script -->
 
 </body>
 </html>
