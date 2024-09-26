@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // اتصال بقاعدة البيانات
-mongoose.connect('YOUR_MONGODB_URI', {
+mongoose.connect('mongodb+srv://Arabm:Arabm@cluster0.rakl4qh.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
