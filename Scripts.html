@@ -205,17 +205,11 @@
 
         function copyScriptText(id) {
             const scriptTextElement = document.getElementById(`script-${id}`);
-            const scriptText = scriptTextElement.textContent;
-
-            navigator.clipboard.writeText(scriptText)
-                .then(() => {
-                    alert('تم نسخ السكربت بنجاح');
-                })
-                .catch(err => {
-                    console.error('خطأ في نسخ السكربت: ', err);
-                    alert('فشل في نسخ السكربت. حاول مجدداً.');
-                });
+            scriptTextElement.select(); // حدد النص داخل textarea
+            document.execCommand('copy'); // استخدم الأمر لنسخ النص
+            alert('تم نسخ السكربت بنجاح');
         }
+
 
         function shareBox(id) {
             const url = `${window.location.origin}${window.location.pathname}#${id}`;
