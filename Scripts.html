@@ -231,7 +231,7 @@
         }
 
         // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
-        fetch('Scripts.json')
+        fetch('Script.json')
             .then(response => response.json())
             .then(data => {
                 createBoxes(data);
