@@ -204,7 +204,7 @@
         }
 
         function copyScriptText(id) {
-            const scriptTextElement = document.getElementById(`script-${id}`);
+            const scriptTextElement = document.getElementById(`description`);
             scriptTextElement.select(); // حدد النص داخل textarea
             document.execCommand('copy'); // استخدم الأمر لنسخ النص
             alert('تم نسخ السكربت بنجاح');
