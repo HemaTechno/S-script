@@ -174,65 +174,71 @@
         </a>
     </div>
 
-    <script>
-        // الدالة التي تضيف المربعات إلى الصفحة
-        function createBoxes(data) {
-            const boxContainer = document.getElementById('boxContainer');
+<script>
+    // الدالة التي تضيف المربعات إلى الصفحة
+    function createBoxes(data) {
+        const boxContainer = document.getElementById('boxContainer');
 
-            data.forEach(box => {
-                const container = document.createElement('div');
-                container.classList.add('container');
-                container.id = `box-${box.id}`;
+        data.forEach(box => {
+            const container = document.createElement('div');
+            container.classList.add('container');
+            container.id = `box-${box.id}`;
 
-                container.innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${box.videoId}" allowfullscreen></iframe>
-                    <div class="status">
-                        <h1>${box.title}</h1>
-                        <p>${box.description}</p>
-                    </div>
-                    <div class="script-container">
-                        <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
-                    </div>
-                    <div class="key-container">
-                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
-                        <button onclick="shareBox('${box.id}')">مشاركة</button>
-                    </div>
-                `;
+            container.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${box.videoId}" allowfullscreen></iframe>
+                <div class="status">
+                    <h1>${box.title}</h1>
+                    <p>${box.description}</p>
+                </div>
+                <div class="script-container">
+                    <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
+                </div>
+                <div class="key-container">
+                    <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                    <button onclick="shareBox('${box.id}')">مشاركة</button>
+                </div>
+            `;
 
-                boxContainer.appendChild(container);
-            });
-        }
+            boxContainer.appendChild(container);
+        });
+    }
 
-        function copyScriptText(id) {
-            const scriptTextElement = document.getElementById(`script-${id}`);
-            const scriptText = scriptTextElement.textContent;
-            scriptTextElement.select(); // حدد النص داخل textarea
-            document.execCommand('scriptText'); // استخدم الأمر لنسخ النص
-            alert('تم نسخ السكربت بنجاح');
-        }
+    function copyScriptText(id) {
+        const iframe = document.querySelector(`#box-${id} .script-container iframe`);
+        const scriptText = iframe.contentWindow.document.body.innerText;
 
+        const textarea = document.createElement('textarea');
+        textarea.value = scriptText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        alert('تم نسخ السكربت بنجاح');
+    }
 
-        function shareBox(id) {
-            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    function shareBox(id) {
+        const url = `${window.location.origin}${window.location.pathname}#${id}`;
 
-            navigator.clipboard.writeText(url)
-                .then(() => {
-                    alert(`تم نسخ الرابط: ${url}`);
-                })
-                .catch(err => {
-                    console.error('خطأ في نسخ الرابط: ', err);
-                    alert('فشل في نسخ الرابط. حاول مجدداً.');
-                });
-        }
-
-        // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
-        fetch('Script.json')
-            .then(response => response.json())
-            .then(data => {
-                createBoxes(data);
+        navigator.clipboard.writeText(url)
+            .then(() => {
+                alert(`تم نسخ الرابط: ${url}`);
             })
-            .catch(error => console.error('Error loading data:', error));
-    </script>
+            .catch(err => {
+                console.error('خطأ في نسخ الرابط: ', err);
+                alert('فشل في نسخ الرابط. حاول مجدداً.');
+            });
+    }
+
+    // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
+    fetch('Script.json')
+        .then(response => response.json())
+        .then(data => {
+            createBoxes(data);
+        })
+        .catch(error => console.error('Error loading data:', error));
+</script>
+
 
     <!-- ADSTERRA -->
     <script type="text/javascript">
