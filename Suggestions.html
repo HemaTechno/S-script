@@ -1,38 +1,143 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+    <!-- ADSTERRA -->
+    <script type='text/javascript' src='//dreadfullyemulateconservation.com/c8/67/c2/c867c21ca6f549c59064f55534db0add.js'></script>
+    <!-- Ads End -->
+
+    <meta property="og:title" content="H-Scripts" />
+    <meta property="og:description" content="افضل موقع يساعدك في اي شي بخصوص هاكات و سكربتات روبلوكس" />
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1210197000306434069/1289012963142926417/20240926_203252.jpg?ex=66f7465f&is=66f5f4df&hm=feb5df21452b3dea3e62fd625a180d8f7a64eb497db830fc882f054e1d53af3c&" />
+    <meta property="og:url" content="https://h-scripts.site" />
+    <meta property="og:type" content="website" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="صفحة تحتوي على إعلانات في أماكن مختلفة.">
-    <meta name="keywords" content="إعلانات, سكربتات, روبلوكس">
-    <title>صفحة إعلانات</title>
+    <meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
+    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
+    <meta name="author" content="Hema_Tech1">
+    <title>Hack</title>
     <style>
+        /* أنماط CSS تبقى كما هي */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1e27;
+            color: #fff;
+            direction: rtl;
+            text-align: right;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
         #boxContainer {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
+            width: 100%;
+            max-width: 800px;
         }
         .container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: left;
+            background-color: #2c3140;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        .status h1 {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            color: #f1f1f1;
+        }
+        .status p {
+            font-size: 1.1em;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .navbar {
+            background-color: #252b39;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #7a7a7a;
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .navbar-item.active,
+        .navbar-item:hover {
+            color: #007bff;
+        }
+        .add-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: -40px;
+        }
+        .add-btn:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            margin: 10px 0;
+            border: none;
+            display: block;
+        }
+        .script-container {
+            margin: 10px 0;
         }
         .ad {
             width: 100%;
@@ -41,11 +146,7 @@
             padding: 15px;
             background-color: #eaeaea;
             border: 1px solid #ccc;
-        }
-        iframe {
-            width: 100%;
-            height: 200px;
-            border: none;
+            color: black;
         }
     </style>
 </head>
@@ -53,48 +154,49 @@
 
     <!-- إعلان في بداية الصفحة -->
     <div class="ad">
-        <h2>إعلان 1 - في بداية الصفحة</h2>
-        <script type='text/javascript' src='//ad-network.com/your-ad-1.js'></script>
-    </div>
+        <script type="text/javascript">
+	atOptions = {
+		'key' : 'f7a37134859d04a81c7fd919dc623b71',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//dreadfullyemulateconservation.com/f7a37134859d04a81c7fd919dc623b71/invoke.js"></script>    </div>
 
-    <!-- مربع المحتوى -->
     <div id="boxContainer"></div>
 
-    <!-- إعلان في منتصف الصفحة -->
-    <div class="ad">
-        <h2>إعلان 2 - في منتصف الصفحة</h2>
-        <script type='text/javascript' src='//ad-network.com/your-ad-2.js'></script>
-    </div>
-
-    <!-- إعلان في نهاية الصفحة -->
-    <div class="ad">
-        <h2>إعلان 3 - في نهاية الصفحة</h2>
-        <script type='text/javascript' src='//ad-network.com/your-ad-3.js'></script>
+    <div class="navbar">
+        <a href="Public-Scripts.html" class="navbar-item">سكربتات</a>
+        <a href="scripts.html" class="navbar-item">يوتيوب</a>
+        <a href="index.html" class="add-btn">🏠</a>
+        <a href="hack.html" class="navbar-item">هاكات</a>
+        <a href="privacy.html" class="navbar-item">الخصوصيه</a>
     </div>
 
     <script>
-        const data = [
-            { id: 1, title: 'مربع 1', description: 'وصف 1', videoId: 'abc123' },
-            { id: 2, title: 'مربع 2', description: 'وصف 2', videoId: 'def456' },
-            { id: 3, title: 'مربع 3', description: 'وصف 3', videoId: 'ghi789' },
-            { id: 4, title: 'مربع 4', description: 'وصف 4', videoId: 'jkl012' },
-            { id: 5, title: 'مربع 5', description: 'وصف 5', videoId: 'mno345' },
-            { id: 6, title: 'مربع 6', description: 'وصف 6', videoId: 'pqr678' },
-            { id: 7, title: 'مربع 7', description: 'وصف 7', videoId: 'stu901' },
-        ];
-
         function createBoxes(data) {
             const boxContainer = document.getElementById('boxContainer');
 
             data.forEach((box, index) => {
-                // إنشاء المربع
                 const container = document.createElement('div');
                 container.classList.add('container');
+                container.id = `box-${box.id}`;
 
                 container.innerHTML = `
-                    <h3>${box.title}</h3>
-                    <p>${box.description}</p>
                     <iframe src="https://www.youtube.com/embed/${box.videoId}" allowfullscreen></iframe>
+                    <div class="status">
+                        <h1>${box.title}</h1>
+                        <p>${box.description}</p>
+                    </div>
+                    <div class="script-container">
+                        <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
+                    </div>
+                    <div class="key-container">
+                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                        <button onclick="shareBox('${box.id}')">مشاركة</button>
+                    </div>
                 `;
 
                 boxContainer.appendChild(container);
@@ -104,16 +206,66 @@
                     const adDiv = document.createElement('div');
                     adDiv.classList.add('ad');
                     adDiv.innerHTML = `
-                        <h2>إعلان إضافي</h2>
-                        <script type='text/javascript' src='//ad-network.com/extra-ad-${index + 1}.js'></script>
-                    `;
+                        <script type="text/javascript">
+	atOptions = {
+		'key' : 'f7a37134859d04a81c7fd919dc623b71',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//dreadfullyemulateconservation.com/f7a37134859d04a81c7fd919dc623b71/invoke.js"></script> `;
                     boxContainer.appendChild(adDiv);
                 }
             });
         }
 
-        createBoxes(data);
+        function copyScriptText(id) {
+            const iframe = document.querySelector(`#box-${id} .script-container iframe`);
+
+            // الانتظار حتى يتم تحميل محتوى الـ iframe
+            iframe.onload = function() {
+                const scriptText = iframe.contentWindow.document.body.innerText;
+
+                const textarea = document.createElement('textarea');
+                textarea.value = scriptText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                alert('تم نسخ السكربت بنجاح');
+            };
+
+            // إذا كان الـ iframe قد تم تحميله مسبقًا
+            if (iframe.contentDocument.readyState === "complete") {
+                iframe.onload(); // استدعاء الدالة يدويًا إذا كان التحميل مكتملًا
+            }
+        }
+
+        function shareBox(id) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert(`تم نسخ الرابط: ${url}`);
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ الرابط: ', err);
+                    alert('فشل في نسخ الرابط. حاول مجدداً.');
+                });
+        }
+
+        // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
+        fetch('Scripts.json')
+            .then(response => response.json())
+            .then(data => {
+                createBoxes(data);
+            })
+            .catch(error => console.error('Error loading data:', error));
     </script>
 
+    <!-- ADSTERRA -->
 </body>
 </html>
