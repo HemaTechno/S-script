@@ -197,11 +197,32 @@
             });
         }
 
-        // دالة لتحميل الملفات
-        function downloadFile(link) {
-            window.open(link, '_blank'); // فتح الرابط في علامة تبويب جديدة
+        function copyScriptText(id) {
+            const scriptTextElement = document.getElementById(`script-${id}`);
+            const scriptText = scriptTextElement.textContent;
+
+            navigator.clipboard.writeText(scriptText)
+                .then(() => {
+                    alert('تم نسخ السكربت بنجاح');
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ السكربت: ', err);
+                    alert('فشل في نسخ السكربت. حاول مجدداً.');
+                });
         }
 
+        function shareBox(id) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert(`تم نسخ الرابط: ${url}`);
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ الرابط: ', err);
+                    alert('فشل في نسخ الرابط. حاول مجدداً.');
+                });
+        }
         // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
         fetch('Script.json')
             .then(response => response.json())
