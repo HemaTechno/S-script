@@ -3,89 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شات Tawk.to</title>
+    <meta name="description" content="صفحة تحتوي على إعلانات في أماكن مختلفة.">
+    <meta name="keywords" content="إعلانات, سكربتات, روبلوكس">
+    <title>صفحة إعلانات</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden; /* منع التمرير */
+            box-sizing: border-box;
         }
-
-        /* قائمة الدردشة الجانبية */
-        .chat-container {
-            position: fixed;
-            right: -300px; /* بداية خارج الشاشة */
-            top: 0;
-            width: 300px; /* عرض القائمة */
-            height: 100%;
-            background-color: #fff; /* خلفية القائمة */
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* ظل */
-            transition: right 0.3s; /* تأثير الانزلاق */
-            z-index: 9999; /* فوق كل العناصر */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
         }
-
-        /* زر فتح القائمة */
-        .toggle-button {
-            position: fixed;
-            right: 10px; /* من اليمين */
-            bottom: 20px; /* من الأسفل */
-            width: 50px;
-            height: 50px;
-            background-color: #007bff; /* لون الزر */
-            color: #fff; /* لون النص */
-            border: none; /* بدون حدود */
-            border-radius: 5px; /* زوايا دائرية */
-            cursor: pointer; /* شكل المؤشر */
-            z-index: 10000; /* فوق كل العناصر */
-            transition: background-color 0.3s;
+        #boxContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
         }
-
-        .toggle-button:hover {
-            background-color: #0056b3; /* تغيير اللون عند التمرير */
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
         }
-
-        /* الرسائل */
-        .tawk-message {
-            background-color: #f1f1f1; /* خلفية الرسالة */
-            color: #333; /* لون النص */
+        .ad {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+            padding: 15px;
+            background-color: #eaeaea;
+            border: 1px solid #ccc;
+        }
+        iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- زر لفتح القائمة -->
-    <button class="toggle-button" onclick="toggleChat()">💬</button>
-
-    <!-- قائمة الدردشة -->
-    <div class="chat-container" id="chatContainer">
-        <!-- هنا سيتم تحميل واجهة Tawk.to -->
-        <div id="tawkToContainer"></div>
+    <!-- إعلان في بداية الصفحة -->
+    <div class="ad">
+        <h2>إعلان 1 - في بداية الصفحة</h2>
+        <script type='text/javascript' src='//ad-network.com/your-ad-1.js'></script>
     </div>
 
-    <!-- Start of Tawk.to Script -->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/660c1029a0c6737bd1276b66/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
+    <!-- مربع المحتوى -->
+    <div id="boxContainer"></div>
 
-        // دالة لتبديل عرض القائمة
-        function toggleChat() {
-            const chatContainer = document.getElementById('chatContainer');
-            if (chatContainer.style.right === '0px') {
-                chatContainer.style.right = '-300px'; // إخفاء القائمة
-            } else {
-                chatContainer.style.right = '0px'; // إظهار القائمة
-            }
+    <!-- إعلان في منتصف الصفحة -->
+    <div class="ad">
+        <h2>إعلان 2 - في منتصف الصفحة</h2>
+        <script type='text/javascript' src='//ad-network.com/your-ad-2.js'></script>
+    </div>
+
+    <!-- إعلان في نهاية الصفحة -->
+    <div class="ad">
+        <h2>إعلان 3 - في نهاية الصفحة</h2>
+        <script type='text/javascript' src='//ad-network.com/your-ad-3.js'></script>
+    </div>
+
+    <script>
+        const data = [
+            { id: 1, title: 'مربع 1', description: 'وصف 1', videoId: 'abc123' },
+            { id: 2, title: 'مربع 2', description: 'وصف 2', videoId: 'def456' },
+            { id: 3, title: 'مربع 3', description: 'وصف 3', videoId: 'ghi789' },
+            { id: 4, title: 'مربع 4', description: 'وصف 4', videoId: 'jkl012' },
+            { id: 5, title: 'مربع 5', description: 'وصف 5', videoId: 'mno345' },
+            { id: 6, title: 'مربع 6', description: 'وصف 6', videoId: 'pqr678' },
+            { id: 7, title: 'مربع 7', description: 'وصف 7', videoId: 'stu901' },
+        ];
+
+        function createBoxes(data) {
+            const boxContainer = document.getElementById('boxContainer');
+
+            data.forEach((box, index) => {
+                // إنشاء المربع
+                const container = document.createElement('div');
+                container.classList.add('container');
+
+                container.innerHTML = `
+                    <h3>${box.title}</h3>
+                    <p>${box.description}</p>
+                    <iframe src="https://www.youtube.com/embed/${box.videoId}" allowfullscreen></iframe>
+                `;
+
+                boxContainer.appendChild(container);
+
+                // كل 3 مربعات إضافة إعلان
+                if ((index + 1) % 3 === 0) {
+                    const adDiv = document.createElement('div');
+                    adDiv.classList.add('ad');
+                    adDiv.innerHTML = `
+                        <h2>إعلان إضافي</h2>
+                        <script type='text/javascript' src='//ad-network.com/extra-ad-${index + 1}.js'></script>
+                    `;
+                    boxContainer.appendChild(adDiv);
+                }
+            });
         }
+
+        createBoxes(data);
     </script>
-    <!-- End of Tawk.to Script -->
 
 </body>
 </html>
