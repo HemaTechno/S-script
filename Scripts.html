@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-
-<!-- ADSTERRA -->
-
-<script type='text/javascript' src='//dreadfullyemulateconservation.com/c8/67/c2/c867c21ca6f549c59064f55534db0add.js'></script>
-
-
-  <!-- Ads End -->
+    <!-- ADSTERRA -->
+    <script type='text/javascript' src='//dreadfullyemulateconservation.com/c8/67/c2/c867c21ca6f549c59064f55534db0add.js'></script>
+    <!-- Ads End -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +20,11 @@
         }
 
         html, body {
-    overflow-x: hidden; /* منع التحرك الأفقي */
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    }
-
+            overflow-x: hidden; /* منع التحرك الأفقي */
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Arial', sans-serif;
@@ -44,29 +39,26 @@
             align-items: center; /* لجعل المحتوى في وسط الصفحة أفقيًا */
         }
 
-#boxContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* المسافة بين المربعات */
-    padding: 20px; /* المسافة من الأعلى والأسفل والجوانب */
-    width: 100%; /* جعل الحاوية بعرض الشاشة بالكامل */
-    margin: 0; /* إزالة الهوامش */
-}
+        #boxContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* المسافة بين المربعات */
+            padding: 20px; /* المسافة من الأعلى والأسفل والجوانب */
+            width: 100%; /* جعل الحاوية بعرض الشاشة بالكامل */
+            margin: 0; /* إزالة الهوامش */
+        }
 
-.container {
-    background-color: #2c3140;
-    border-radius: 12px;
-    padding: 20px; /* المسافة داخل المربع */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-    width: 100%; /* اجعل المربعات تأخذ عرض الحاوية بالكامل */
-    margin: 0; /* إزالة أي هوامش إضافية */
-    /* تضمن أن المربعات تكون داخل الحواف */
-    max-width: 100%; /* تأكد من أن العرض لا يتجاوز 100% */
-}
-
-
-
+        .container {
+            background-color: #2c3140;
+            border-radius: 12px;
+            padding: 20px; /* المسافة داخل المربع */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%; /* اجعل المربعات تأخذ عرض الحاوية بالكامل */
+            margin: 0; /* إزالة أي هوامش إضافية */
+            /* تضمن أن المربعات تكون داخل الحواف */
+            max-width: 100%; /* تأكد من أن العرض لا يتجاوز 100% */
+        }
 
         .container:hover {
             transform: translateY(-5px);
@@ -180,166 +172,57 @@
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
         }
 
+        /* تخصيص الفيديو */
+        .video-container {
+            margin-bottom: 20px; /* المسافة بين الفيديو والمحتوى */
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16 / 9; /* للحفاظ على نسبة العرض إلى الارتفاع */
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 <body>
 
-<!-- اعلان ADSTERRA -->
+    <!-- ADSTERRA -->
     <script type='text/javascript' src='//dreadfullyemulateconservation.com/20/e3/73/20e37385f0dc9cfc92797aefc4431c4f.js'></script>
 
-  
+    <!-- حاوية الفيديو -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
+    <!-- باقي المحتوى -->
     <div id="boxContainer"></div>
 
     <!-- شريط التنقل السفلي -->
-<div class="navbar">
-    <a href="Public-Scripts.html" class="navbar-item">
-        <i class="navbar-icon">🌐</i>
-        <span>سكربتات</span>
-    </a>
-    <a href="scripts.html" class="navbar-item">
-        <i class="navbar-icon">🗂️</i>
-        <span>يوتيوب</span>
-    </a>
-    <a href="index.html" class="add-btn">🏠</a> <!-- تغيير هنا -->
-    <a href="hack.html" class="navbar-item">
-        <i class="navbar-icon">👾</i>
-        <span>هاكات</span>
-    </a>
-<a href="privacy.html" class="navbar-item">
+    <div class="navbar">
+        <a href="Public-Scripts.html" class="navbar-item">
+            <i class="navbar-icon">🌐</i>
+            <span>سكربتات</span>
+        </a>
+        <a href="scripts.html" class="navbar-item">
+            <i class="navbar-icon">🗂️</i>
+            <span>يوتيوب</span>
+        </a>
+        <a href="index.html" class="add-btn">🏠</a>
+        <a href="hack.html" class="navbar-item">
+            <i class="navbar-icon">👾</i>
+            <span>هاكات</span>
+        </a>
+        <a href="privacy.html" class="navbar-item">
             <i class="navbar-icon">🔖</i>
             <span>الخصوصيه</span>
         </a>
-</div>
+    </div>
 
+    <!-- باقي السكربتات -->
 
-<!-- ADSTERRA -->
-
-<script type="text/javascript">
-    atOptions = {
-        'key' : 'f7a37134859d04a81c7fd919dc623b71',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-    };
-</script>
-<script type="text/javascript" src="//dreadfullyemulateconservation.com/f7a37134859d04a81c7fd919dc623b71/invoke.js"></script>
-
-<script type="text/javascript">
-    atOptions = {
-        'key' : 'f2f1c0dd694672cbb78d5cbbf7fd578c',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-    };
-</script>
-<script type="text/javascript" src="//dreadfullyemulateconservation.com/f2f1c0dd694672cbb78d5cbbf7fd578c/invoke.js"></script>
-
-<!-- ADSTERRA -->
-
-
-  
-
-    <script>
-        // الدالة التي تضيف المربعات إلى الصفحة
-        function createBoxes(data) {
-            const boxContainer = document.getElementById('boxContainer');
-
-            data.forEach(box => {
-                const container = document.createElement('div');
-                container.classList.add('container');
-                container.id = `box-${box.id}`;  // إضافة معرف فريد لكل مربع
-
-                container.innerHTML = `
-                    <div class="status">
-                        <h1>${box.title}</h1>
-                        <p>${box.description}</p>
-                    </div>
-                    <div class="key-container">
-                        <p id="script-${box.id}">${box.scriptText}</p>
-                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
-                        <button onclick="shareBox('${box.id}')">مشاركة</button> <!-- زر المشاركة -->
-                    </div>
-                    <div class="footer">
-                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
-                        <a href="${box.youtubeLink}">YouTube</a>
-                        <a href="https://t.me/hematech_1">Telegram</a>
-                    </div>
-                `;
-
-                boxContainer.appendChild(container);
-            });
-        }
-
-        // دالة لنسخ نص السكربت إلى الحافظة وإظهار إشعار
-        function copyScriptText(id) {
-            const scriptTextElement = document.getElementById(`script-${id}`);
-            const scriptText = scriptTextElement.textContent;
-
-            navigator.clipboard.writeText(scriptText)
-                .then(() => {
-                    alert('تم نسخ السكربت بنجاح');
-                })
-                .catch(err => {
-                    console.error('خطأ في نسخ السكربت: ', err);
-                    alert('فشل في نسخ السكربت. حاول مجدداً.');
-                });
-        }
-
-        // دالة لنسخ رابط الموقع مع رقم المربع
-        function shareBox(id) {
-            const url = `${window.location.origin}${window.location.pathname}#${id}`;
-
-            navigator.clipboard.writeText(url)
-                .then(() => {
-                    alert(`تم نسخ الرابط: ${url}`);
-                })
-                .catch(err => {
-                    console.error('خطأ في نسخ الرابط: ', err);
-                    alert('فشل في نسخ الرابط. حاول مجدداً.');
-                });
-        }
-
-        // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
-        fetch('Script.json')
-            .then(response => response.json())
-            .then(data => {
-                createBoxes(data);
-            })
-            .catch(error => console.error('Error loading data:', error));
-    </script>
-
-
-
-<!-- ADSTERRA -->
-
-<script type="text/javascript">
-    atOptions = {
-        'key' : 'f7a37134859d04a81c7fd919dc623b71',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-    };
-</script>
-<script type="text/javascript" src="//dreadfullyemulateconservation.com/f7a37134859d04a81c7fd919dc623b71/invoke.js"></script>
-
-<script type="text/javascript">
-    atOptions = {
-        'key' : 'f2f1c0dd694672cbb78d5cbbf7fd578c',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-    };
-</script>
-<script type="text/javascript" src="//dreadfullyemulateconservation.com/f2f1c0dd694672cbb78d5cbbf7fd578c/invoke.js"></script>
-
-<!-- ADSTERRA -->
-
-
-    
 </body>
 </html>
