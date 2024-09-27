@@ -6,7 +6,6 @@
 
 <script type='text/javascript' src='//dreadfullyemulateconservation.com/c8/67/c2/c867c21ca6f549c59064f55534db0add.js'></script>
 
-
   <!-- Ads End -->
   
     <meta property="og:title" content="H-Scripts" />
@@ -15,8 +14,6 @@
     <meta property="og:url" content="https://h-scripts.site" />
     <meta property="og:type" content="website" />
 
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scripts</title>
@@ -117,16 +114,82 @@
             height: 300px;
             margin-bottom: 15px;
         }
+
+        /* شريط التنقل السفلي */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1a1e27;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .navbar-item, .add-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .navbar-item:hover, .add-btn:hover {
+            color: #007bff;
+        }
+
+        .navbar-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .add-btn {
+            font-size: 28px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 <!-- اعلان ADSTERRA -->
     <script type='text/javascript' src='//dreadfullyemulateconservation.com/20/e3/73/20e37385f0dc9cfc92797aefc4431c4f.js'></script>
 
-    
-
     <div id="boxContainer"></div>
 
+<!-- شريط التنقل السفلي -->
+    <div class="navbar">
+        <a href="Public-Scripts.html" class="navbar-item">
+            <i class="navbar-icon">🌐</i>
+            <span>سكربتات</span>
+        </a>
+        <a href="scripts.html" class="navbar-item">
+            <i class="navbar-icon">🗂️</i>
+            <span>يوتيوب</span>
+        </a>
+        <a href="index.html" class="add-btn">🏠</a> <!-- تغيير هنا -->
+        <a href="hack.html" class="navbar-item">
+            <i class="navbar-icon">👾</i>
+            <span>هاكات</span>
+        </a>
+        <a href="privacy.html" class="navbar-item">
+            <i class="navbar-icon">🔖</i>
+            <span>الخصوصيه</span>
+        </a>
+    </div>
 
 <!-- ADSTERRA -->
 
@@ -153,7 +216,6 @@
 <script type="text/javascript" src="//dreadfullyemulateconservation.com/f2f1c0dd694672cbb78d5cbbf7fd578c/invoke.js"></script>
 
 <!-- ADSTERRA -->
-
 
     
     <script>
@@ -214,14 +276,13 @@
                 });
         }
 
-        fetch('Script.json')
+        fetch('Scripts.json')
             .then(response => response.json())
             .then(data => {
                 createBoxes(data);
             })
             .catch(error => console.error('Error loading data:', error));
     </script>
-
 
 <!-- ADSTERRA -->
 
@@ -248,8 +309,6 @@
 <script type="text/javascript" src="//dreadfullyemulateconservation.com/f2f1c0dd694672cbb78d5cbbf7fd578c/invoke.js"></script>
 
 <!-- ADSTERRA -->
-
-    
 
 </body>
 </html>
