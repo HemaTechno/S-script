@@ -203,18 +203,28 @@
         }
 
         function copyScriptText(id) {
-            const iframe = document.querySelector(`#box-${id} .script-container iframe`);
-            const scriptText = iframe.contentWindow.document.body.innerText;
+    const iframe = document.querySelector(`#box-${id} .script-container iframe`);
 
-            const textarea = document.createElement('textarea');
-            textarea.value = scriptText;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            
-            alert('تم نسخ السكربت بنجاح');
-        }
+    // الانتظار حتى يتم تحميل محتوى الـ iframe
+    iframe.onload = function() {
+        const scriptText = iframe.contentWindow.document.body.innerText;
+
+        const textarea = document.createElement('textarea');
+        textarea.value = scriptText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        alert('تم نسخ السكربت بنجاح');
+    };
+
+    // إذا كان الـ iframe قد تم تحميله مسبقًا
+    if (iframe.contentDocument.readyState === "complete") {
+        iframe.onload(); // استدعاء الدالة يدويًا إذا كان التحميل مكتملًا
+    }
+}
+
 
         function shareBox(id) {
             const url = `${window.location.origin}${window.location.pathname}#${id}`;
