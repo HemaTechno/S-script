@@ -194,9 +194,9 @@
                     <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
                 <div class="key-container">
     <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
-    <button onclick="copyDescription('${box.id}')">نسخ الوصف</button> <!-- زر نسخ الوصف -->
     <button onclick="shareBox('${box.id}')">مشاركة</button>
 </div>
+
 
             `;
 
@@ -217,6 +217,22 @@
         
         alert('تم نسخ السكربت بنجاح');
     }
+
+
+    function copyScriptText(id) {
+    const iframe = document.querySelector(`#box-${id} .script-container iframe`);
+    const scriptText = iframe.contentWindow.document.body.innerText;
+
+    const textarea = document.createElement('textarea');
+    textarea.value = scriptText;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    alert('تم نسخ السكربت بنجاح');
+}
+
 
     function copyDescription(id) {
     const description = document.querySelector(`#box-${id} .status p`).innerText; // الحصول على الوصف
