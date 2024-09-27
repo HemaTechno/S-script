@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <!-- ADSTERRA -->
-    <script type='text/javascript' src='//dreadfullyemulateconservation.com/c8/67/c2/c867c21ca6f549c59064f55534db0add.js'></script>
-    <!-- Ads End -->
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
-    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
-    <meta name="author" content="Hema_Tech1">
-    <meta property="og:image" content="https://media.discordapp.net/attachments/1135848559607021680/1286131920039579658/20240918_221032.jpg?ex=66eccb30&is=66eb79b0&hm=7b5976954e142b8700d8b28b810d6450e2569109ff455be3dda0b7e2453101f0&">
     <title>Scripts</title>
     <style>
         * {
@@ -20,7 +12,7 @@
         }
 
         html, body {
-            overflow-x: hidden; /* منع التحرك الأفقي */
+            overflow-x: hidden;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -35,29 +27,27 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* لجعل المحتوى في وسط الصفحة عموديًا */
-            align-items: center; /* لجعل المحتوى في وسط الصفحة أفقيًا */
+            justify-content: center;
+            align-items: center;
         }
 
         #boxContainer {
             display: flex;
             flex-direction: column;
-            gap: 20px; /* المسافة بين المربعات */
-            padding: 20px; /* المسافة من الأعلى والأسفل والجوانب */
-            width: 100%; /* جعل الحاوية بعرض الشاشة بالكامل */
-            margin: 0; /* إزالة الهوامش */
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+            margin: 0;
         }
 
         .container {
             background-color: #2c3140;
             border-radius: 12px;
-            padding: 20px; /* المسافة داخل المربع */
+            padding: 20px;
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%; /* اجعل المربعات تأخذ عرض الحاوية بالكامل */
-            margin: 0; /* إزالة أي هوامش إضافية */
-            /* تضمن أن المربعات تكون داخل الحواف */
-            max-width: 100%; /* تأكد من أن العرض لا يتجاوز 100% */
+            width: 100%;
+            max-width: 100%;
         }
 
         .container:hover {
@@ -106,123 +96,82 @@
             background-color: #0056b3;
         }
 
-        .footer a {
-            color: #6ab04c;
-            text-decoration: none;
-            margin: 0 8px;
-            font-size: 12px;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* شريط التنقل السفلي */
-        .navbar {
-            background-color: #252b39;
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
+        iframe {
             width: 100%;
-            height: 70px;
-            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+            height: 300px;
+            margin-bottom: 15px;
         }
-
-        .navbar-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #7a7a7a;
-            font-size: 12px;
-            text-decoration: none; /* إلغاء الخطوط تحت النص */
-            transition: color 0.3s ease;
-        }
-
-        .navbar-item i {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .navbar-item.active,
-        .navbar-item:hover {
-            color: #007bff;
-        }
-
-        .add-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            margin-top: -40px;
-        }
-
-        .add-btn:hover {
-            background-color: #0056b3;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        /* تخصيص الفيديو */
-        .video-container {
-            margin-bottom: 20px; /* المسافة بين الفيديو والمحتوى */
-            width: 100%;
-            max-width: 600px;
-            aspect-ratio: 16 / 9; /* للحفاظ على نسبة العرض إلى الارتفاع */
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- ADSTERRA -->
-    <script type='text/javascript' src='//dreadfullyemulateconservation.com/20/e3/73/20e37385f0dc9cfc92797aefc4431c4f.js'></script>
-
-    <!-- حاوية الفيديو -->
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-    <!-- باقي المحتوى -->
     <div id="boxContainer"></div>
 
-    <!-- شريط التنقل السفلي -->
-    <div class="navbar">
-        <a href="Public-Scripts.html" class="navbar-item">
-            <i class="navbar-icon">🌐</i>
-            <span>سكربتات</span>
-        </a>
-        <a href="scripts.html" class="navbar-item">
-            <i class="navbar-icon">🗂️</i>
-            <span>يوتيوب</span>
-        </a>
-        <a href="index.html" class="add-btn">🏠</a>
-        <a href="hack.html" class="navbar-item">
-            <i class="navbar-icon">👾</i>
-            <span>هاكات</span>
-        </a>
-        <a href="privacy.html" class="navbar-item">
-            <i class="navbar-icon">🔖</i>
-            <span>الخصوصيه</span>
-        </a>
-    </div>
+    <script>
+        function createBoxes(data) {
+            const boxContainer = document.getElementById('boxContainer');
 
-    <!-- باقي السكربتات -->
+            data.forEach(box => {
+                const container = document.createElement('div');
+                container.classList.add('container');
+                container.id = `box-${box.id}`;
+
+                container.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${box.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="status">
+                        <h1>${box.title}</h1>
+                        <p>${box.description}</p>
+                    </div>
+                    <div class="key-container">
+                        <p id="script-${box.id}">${box.scriptText}</p>
+                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                        <button onclick="shareBox('${box.id}')">مشاركة</button>
+                    </div>
+                    <div class="footer">
+                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
+                        <a href="${box.youtubeLink}">YouTube</a>
+                        <a href="https://t.me/hematech_1">Telegram</a>
+                    </div>
+                `;
+
+                boxContainer.appendChild(container);
+            });
+        }
+
+        function copyScriptText(id) {
+            const scriptTextElement = document.getElementById(`script-${id}`);
+            const scriptText = scriptTextElement.textContent;
+
+            navigator.clipboard.writeText(scriptText)
+                .then(() => {
+                    alert('تم نسخ السكربت بنجاح');
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ السكربت: ', err);
+                    alert('فشل في نسخ السكربت. حاول مجدداً.');
+                });
+        }
+
+        function shareBox(id) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert(`تم نسخ الرابط: ${url}`);
+                })
+                .catch(err => {
+                    console.error('خطأ في نسخ الرابط: ', err);
+                    alert('فشل في نسخ الرابط. حاول مجدداً.');
+                });
+        }
+
+        fetch('Script.json')
+            .then(response => response.json())
+            .then(data => {
+                createBoxes(data);
+            })
+            .catch(error => console.error('Error loading data:', error));
+    </script>
 
 </body>
 </html>
