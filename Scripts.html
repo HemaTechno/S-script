@@ -192,11 +192,12 @@
                 </div>
                 <div class="script-container">
                     <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
-                </div>
                 <div class="key-container">
-                    <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
-                    <button onclick="shareBox('${box.id}')">مشاركة</button>
-                </div>
+    <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+    <button onclick="copyDescription('${box.id}')">نسخ الوصف</button> <!-- زر نسخ الوصف -->
+    <button onclick="shareBox('${box.id}')">مشاركة</button>
+</div>
+
             `;
 
             boxContainer.appendChild(container);
@@ -215,6 +216,19 @@
         document.body.removeChild(textarea);
         
         alert('تم نسخ السكربت بنجاح');
+    }
+
+    function copyDescription(id) {
+    const description = document.querySelector(`#box-${id} .status p`).innerText; // الحصول على الوصف
+
+    const textarea = document.createElement('textarea');
+    textarea.value = description;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    alert('تم نسخ الوصف بنجاح');
     }
 
     function shareBox(id) {
