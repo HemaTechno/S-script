@@ -220,34 +220,37 @@
     
     <script>
         function createBoxes(data) {
-            const boxContainer = document.getElementById('boxContainer');
+    const boxContainer = document.getElementById('boxContainer');
+    boxContainer.innerHTML = ''; // مسح المحتوى الحالي
 
-            data.forEach(box => {
-                const container = document.createElement('div');
-                container.classList.add('container');
-                container.id = `box-${box.id}`;
+    data.forEach(box => {
+        console.log(box); // تأكد من أن كل مربع يظهر هنا
+        const container = document.createElement('div');
+        container.classList.add('container');
+        container.id = `box-${box.id}`;
 
-                container.innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${box.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                       <div class="status">
-                        <h1>${box.title}</h1>
-                        <p>${box.description}</p>
-                    </div>
-                    <div class="key-container">
-                        <p id="script-${box.id}">${box.scriptText}</p>
-                        <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
-                        <button onclick="shareBox('${box.id}')">مشاركة</button>
-                    </div>
-                    <div class="footer">
-                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
-                        <a href="${box.youtubeLink}">YouTube</a>
-                        <a href="https://t.me/hematech_1">Telegram</a>
-                    </div>
-                `;
+        container.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${box.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="status">
+                <h1>${box.title}</h1>
+                <p>${box.description}</p>
+            </div>
+            <div class="key-container">
+                <p id="script-${box.id}">${box.scriptText}</p>
+                <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
+                <button onclick="shareBox('${box.id}')">مشاركة</button>
+            </div>
+            <div class="footer">
+                <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
+                <a href="${box.youtubeLink}">YouTube</a>
+                <a href="https://t.me/hematech_1">Telegram</a>
+            </div>
+        `;
 
-                boxContainer.appendChild(container);
-            });
-        }
+        boxContainer.appendChild(container);
+    });
+}
+
 
         function copyScriptText(id) {
             const scriptTextElement = document.getElementById(`script-${id}`);
