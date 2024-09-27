@@ -138,9 +138,12 @@
         iframe {
             width: 100%; /* اجعل عرض الإطار 100% */
             height: 315px; /* ارتفاع ثابت للإطار */
-            margin: 0 auto; /* مركز الإطار */
+            margin: 10px 0; /* مسافة خارجية للإطار */
             border: none; /* إزالة الحدود */
             display: block; /* تأكد من أن الإطار ككتلة */
+        }
+        .script-container {
+            margin: 10px 0; /* إضافة مسافة بين الإطار والزر */
         }
     </style>
 </head>
@@ -187,15 +190,12 @@
                         <h1>${box.title}</h1>
                         <p>${box.description}</p>
                     </div>
+                    <div class="script-container">
+                        <iframe src="data:text/plain;charset=utf-8,${encodeURIComponent(box.scriptText)}" frameborder="0"></iframe>
+                    </div>
                     <div class="key-container">
-                        <p id="script-${box.id}">${box.scriptText}</p>
                         <button onclick="copyScriptText('${box.id}')">نسخ السكربت</button>
                         <button onclick="shareBox('${box.id}')">مشاركة</button>
-                    </div>
-                    <div class="footer">
-                        <a href="https://discord.com/invite/WT2c6f34rD">Discord</a>
-                        <a href="${box.youtubeLink}">YouTube</a>
-                        <a href="https://t.me/hematech_1">Telegram</a>
                     </div>
                 `;
 
@@ -229,8 +229,9 @@
                     alert('فشل في نسخ الرابط. حاول مجدداً.');
                 });
         }
+
         // تحميل البيانات من ملف JSON واستدعاء الدالة لإنشاء المربعات
-        fetch('Script.json')
+        fetch('Scripts.json')
             .then(response => response.json())
             .then(data => {
                 createBoxes(data);
