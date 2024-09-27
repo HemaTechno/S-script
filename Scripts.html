@@ -151,6 +151,19 @@
             border-radius: 5px; /* زوايا دائرية */
             overflow: auto; /* إضافة شريط تمرير إذا لزم الأمر */
         }
+        /* تلوين الأكواد بشكل جميل */
+        .token {
+            color: #f92672; /* لون للأكواد */
+        }
+        .token.function {
+            color: #a6e22e; /* لون لدوال الأكواد */
+        }
+        .token.string {
+            color: #e6db74; /* لون للسلاسل النصية */
+        }
+        .token.number {
+            color: #66d9ef; /* لون للأرقام */
+        }
     </style>
 </head>
 <body>
@@ -196,7 +209,7 @@
                     <div class="script-container">
                         <pre><code class="language-lua">${box.scriptText}</code></pre>
                     </div>
-                    <div class="key-container">
+                    <div class="button-container">
                         <button onclick="copyScriptText(${box.id})">نسخ السكربت</button>
                         <button onclick="shareBox(${box.id})">مشاركة</button>
                     </div>
