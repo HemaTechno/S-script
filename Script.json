@@ -16,7 +16,7 @@
         "description": "كل الحقوق لــ تيم هيما تيك",
         "imageUrl": "https://media.discordapp.net/attachments/981018615316906005/1286252502890577971/20240730_192316.jpg?ex=66ed3b7e&is=66ebe9fe&hm=ab20b1932282bb5ab27608e3652250d6e59bd61bd10a7afcfb7bfa3d95cab433&",
         "youtubeLink": "https://youtube.com/your-tutorial-link",
-        "scriptText": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2\"))()"،
+        "scriptText": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2\"))()",
       "videoId": "ZgxFwAkZHlQ"
     },
     {
@@ -25,7 +25,7 @@
         "description": "كل الحقوق لــ تيم هيما تيك",
         "imageUrl": "https://media.discordapp.net/attachments/981018615316906005/1286251296747425802/20240817_021456.jpg?ex=66ed3a5e&is=66ebe8de&hm=e811bc7df3956bf82a4c2851629a39742a52e9760a72b694c24f2ab5ecf6e694&",
         "youtubeLink": "https://youtu.be/9JxsEoft6Rw?si=If1U_KIbxSfP99K4",
-    "scriptText": "_G.HohoVersion = \"v3\"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
+    "scriptText": "_G.HohoVersion = \"v3\"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()",
     "videoId": "9JxsEoft6Rw"
     },
 
