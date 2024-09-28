@@ -1,0 +1,23 @@
+{
+  "steps": [
+    {
+      "id": 1,
+      "text": "Subscribe & Turn Notifications On",
+      "action": "https://www.youtube.com/subscribe_link"
+    },
+    {
+      "id": 2,
+      "text": "Like & Comment",
+      "action": "https://www.youtube.com/comment_link"
+    },
+    {
+      "id": 3,
+      "text": "Download Extension",
+      "action": "https://download_extension_link"
+    }
+  ],
+  "unlock": {
+    "text": "Unlock content",
+    "link": "https://final_unlock_link"
+  }
+}
