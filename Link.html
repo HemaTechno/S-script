@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,110 +7,93 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #6A329F;
-            color: white;
+            background-color: #f4f4f4;
             text-align: center;
             padding: 20px;
         }
-
-        .button {
-            width: 300px;
-            padding: 15px;
-            margin: 10px;
-            background-color: #FF4E42;
+        .action-button {
+            background-color: #007bff;
             color: white;
+            padding: 15px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            margin: 10px;
             font-size: 18px;
+            cursor: pointer;
         }
-
-        .button[disabled] {
-            background-color: #444;
+        .disabled {
+            background-color: #ccc;
             cursor: not-allowed;
         }
-
         .progress {
-            width: 80%;
-            margin: 20px auto;
-            height: 30px;
-            background-color: #ddd;
-            border-radius: 20px;
+            margin: 20px 0;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
             overflow: hidden;
         }
-
         .progress-bar {
             height: 100%;
-            width: 0;
-            background-color: #4CAF50;
-        }
-
-        #unlockButton {
-            background-color: #6200EA;
-            display: none;
+            background-color: #007bff;
+            width: 0%;
+            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <h1>Complete the actions and unlock the link</h1>
+    <h1>Complete the actions to unlock the content</h1>
     <div id="actionButtons"></div>
     <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+        <div id="progressBar" class="progress-bar"></div>
     </div>
-    <button id="unlockButton" class="button">Unlock Content</button>
 
     <script>
         let progress = 0;
-        let currentStep = 0;
         const progressBar = document.getElementById('progressBar');
-        const unlockButton = document.getElementById('unlockButton');
-        const actionButtonsContainer = document.getElementById('actionButtons');
+
+        function updateProgress() {
+            progress += 33.3;
+            progressBar.style.width = progress + '%';
+        }
+
+        function disableButton(button) {
+            button.classList.add('disabled');
+            button.disabled = true;
+        }
+
+        function openLink(url) {
+            const openInAppUrl = "intent:" + url + "#Intent;package=com.google.android.youtube;end;";
+            window.location.href = openInAppUrl;
+        }
+
+        function createButtons(actions) {
+            const actionButtons = document.getElementById('actionButtons');
+
+            actions.forEach(action => {
+                const button = document.createElement('button');
+                button.classList.add('action-button');
+                button.textContent = action.title;
+                button.addEventListener('click', function() {
+                    if (!button.disabled) {
+                        disableButton(button);
+                        updateProgress();
+                        setTimeout(() => {
+                            openLink(action.url);
+                        }, action.waitTime);
+                    }
+                });
+                actionButtons.appendChild(button);
+            });
+        }
 
         fetch('links.json')
             .then(response => response.json())
             .then(data => {
-                const steps = data.steps;
-
-                // Create buttons for each step
-                steps.forEach((step, index) => {
-                    const button = document.createElement('button');
-                    button.classList.add('button');
-                    button.textContent = step.text;
-                    button.disabled = index !== 0; // Enable the first button, disable the rest
-                    button.addEventListener('click', () => handleAction(step, index));
-                    actionButtonsContainer.appendChild(button);
-                });
-
-                // Unlock button setup
-                unlockButton.textContent = data.unlock.text;
-                unlockButton.addEventListener('click', () => {
-                    window.location.href = data.unlock.link;
-                });
+                createButtons(data.actions);
             })
-            .catch(error => console.error('Error loading data:', error));
-
-        function handleAction(step, index) {
-            window.open(step.action, '_blank'); // Open action link in new tab
-
-            const buttons = document.querySelectorAll('.button');
-            buttons[index].disabled = true;
-
-            // Simulate loading time (3 seconds)
-            setTimeout(() => {
-                // Update progress bar
-                progress += 100 / buttons.length;
-                progressBar.style.width = progress + '%';
-
-                // Enable the next button if available
-                if (buttons[index + 1]) {
-                    buttons[index + 1].disabled = false;
-                } else {
-                    // If it's the last step, show unlock button
-                    unlockButton.style.display = 'inline-block';
-                }
-            }, 3000); // 3 seconds delay
-        }
+            .catch(error => {
+                console.error('Error loading actions:', error);
+            });
     </script>
 
 </body>
