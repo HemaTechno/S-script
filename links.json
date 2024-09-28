@@ -2,22 +2,22 @@
     {
         "id": "1",
         "title": "Subscribe & Turn Notifications On",
-        "description": "Complete this step to unlock the link",
-        "image": "path/to/image1.jpg",
-        "url": "https://www.youtube.com/watch?v=EXAMPLE1"
+        "description": "Complete this action to unlock the next step.",
+        "url": "https://www.youtube.com/watch?v=EXAMPLE1",
+        "completed": false
     },
     {
         "id": "2",
         "title": "Like & Comment",
-        "description": "Complete this step to proceed",
-        "image": "path/to/image2.jpg",
-        "url": "https://www.youtube.com/watch?v=EXAMPLE2"
+        "description": "Complete this action to unlock the next step.",
+        "url": "https://www.youtube.com/watch?v=EXAMPLE2",
+        "completed": false
     },
     {
         "id": "3",
         "title": "Download Extension",
-        "description": "Complete this step to unlock the link",
-        "image": "path/to/image3.jpg",
-        "url": "https://www.example.com/download"
+        "description": "Complete this action to unlock the content.",
+        "url": "https://www.example.com/download",
+        "completed": false
     }
 ]
