@@ -158,15 +158,19 @@
             });
         }
 
-        // معالجة الضغط على الزر وتأخير 8 ثواني قبل تنفيذ المهمة
+        // معالجة الضغط على الزر وإعادة التوجيه فورًا إلى الرابط
         function handleStepClick(stepDiv, button, step, totalSteps, finalLink) {
             button.disabled = true;
             button.textContent = "جاري إتمام المهمة...";
 
-            // حفظ التقدم في LocalStorage
-            localStorage.setItem('step' + stepsCompleted, 'completed');
+            // إعادة توجيه المستخدم إلى الرابط الخارجي مباشرة
+            if (step.type === 'youtube') {
+                window.location.href = `https://www.youtube.com/watch?v=${step.videoId}`;
+            } else if (step.type === 'link') {
+                window.location.href = step.url;
+            }
 
-            // بعد 8 ثواني، إعادة التوجيه وتنفيذ المهمة
+            // بدء عد 8 ثوانٍ بعد العودة إلى الصفحة
             setTimeout(() => {
                 stepDiv.classList.add('completed');
                 button.textContent = "تمت المهمة";
@@ -183,17 +187,6 @@
                         window.location.href = finalLink;
                     });
                 }
-
-                // إعادة توجيه إلى الرابط المرتبط بالخطوة
-                if (step.type === 'youtube') {
-                    window.location.href = `https://www.youtube.com/watch?v=${step.videoId}`;
-                } else if (step.type === 'link') {
-                    window.location.href = step.url;
-                }
-
-                // عند العودة إلى الصفحة، يعرف المستخدم أنه أكمل المهمة.
-                button.textContent = "تمت المهمة";
-                localStorage.setItem('stepCompleted', true);
 
             }, 8000); // تأخير لمدة 8 ثواني
         }
