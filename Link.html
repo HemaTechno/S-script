@@ -87,6 +87,20 @@
             margin-bottom: 20px;
             border-radius: 12px;
         }
+
+        /* استايل الإشعار */
+        #notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -96,6 +110,9 @@
     <p id="description">جاري التحميل...</p>
     <div id="stepsContainer"></div>
     <button id="unlockButton">افتح المحتوى</button>
+
+    <!-- إشعار -->
+    <div id="notification">تمت المهمة! انتقل إلى المهمة القادمة.</div>
 
     <script>
         let stepsCompleted = 0;
@@ -138,33 +155,51 @@
 
                 const button = document.createElement('button');
                 button.textContent = "إكمال الخطوة";
-                button.addEventListener('click', () => redirectToLink(stepDiv, button, step, steps.length, finalLink));
+                button.addEventListener('click', () => handleStepClick(stepDiv, button, step, steps.length, finalLink));
                 stepDiv.appendChild(button);
                 stepsContainer.appendChild(stepDiv);
             });
         }
 
-        // إعادة توجيه إلى الرابط المرتبط بالخطوة
-        function redirectToLink(stepDiv, button, step, totalSteps, finalLink) {
-            // يتم إعادة توجيه المستخدم للرابط المرتبط بالخطوة
-            if (step.type === 'youtube') {
-                window.location.href = `https://www.youtube.com/watch?v=${step.videoId}`;
-            } else if (step.type === 'link') {
-                window.location.href = step.url;
-            }
-
-            stepDiv.classList.add('completed');
+        // معالجة الضغط على الزر وتأخير 8 ثواني قبل تنفيذ المهمة
+        function handleStepClick(stepDiv, button, step, totalSteps, finalLink) {
             button.disabled = true;
-            stepsCompleted++;
+            button.textContent = "جاري إتمام المهمة...";
 
-            // إذا أكمل جميع الخطوات، عرض زر فتح المحتوى
-            if (stepsCompleted === totalSteps) {
-                const unlockButton = document.getElementById('unlockButton');
-                unlockButton.style.display = 'block';
-                unlockButton.addEventListener('click', () => {
-                    window.location.href = finalLink;
-                });
-            }
+            setTimeout(() => {
+                stepDiv.classList.add('completed');
+                button.textContent = "تمت المهمة";
+                stepsCompleted++;
+
+                // إظهار إشعار
+                showNotification();
+
+                // إذا أكمل جميع الخطوات، عرض زر فتح المحتوى
+                if (stepsCompleted === totalSteps) {
+                    const unlockButton = document.getElementById('unlockButton');
+                    unlockButton.style.display = 'block';
+                    unlockButton.addEventListener('click', () => {
+                        window.location.href = finalLink;
+                    });
+                }
+
+                // إعادة توجيه إلى الرابط المرتبط بالخطوة
+                if (step.type === 'youtube') {
+                    window.location.href = `https://www.youtube.com/watch?v=${step.videoId}`;
+                } else if (step.type === 'link') {
+                    window.location.href = step.url;
+                }
+
+            }, 8000); // تأخير لمدة 8 ثواني
+        }
+
+        // إظهار إشعار على الشاشة
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000); // عرض الإشعار لمدة 3 ثواني
         }
 
         // الحصول على المعرف من الرابط
