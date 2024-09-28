@@ -1,28 +1,23 @@
-{
-    "actions": [
-        {
-            "id": "action1",
-            "title": "Subscribe & Turn Notifications On",
-            "url": "https://www.youtube.com/watch?v=EXAMPLE1",
-            "waitTime": 5000
-        },
-        {
-            "id": "action2",
-            "title": "Like & Comment",
-            "url": "https://www.youtube.com/watch?v=EXAMPLE2",
-            "waitTime": 5000
-        },
-        {
-            "id": "action3",
-            "title": "Download Extension",
-            "url": "https://www.example.com/extension",
-            "waitTime": 5000
-        },
-        {
-            "id": "unlock",
-            "title": "Unlock content",
-            "url": "https://www.example.com/unlock",
-            "waitTime": 0
-        }
-    ]
-}
+[
+    {
+        "id": "1",
+        "title": "Subscribe & Turn Notifications On",
+        "description": "Complete this step to unlock the link",
+        "image": "path/to/image1.jpg",
+        "url": "https://www.youtube.com/watch?v=EXAMPLE1"
+    },
+    {
+        "id": "2",
+        "title": "Like & Comment",
+        "description": "Complete this step to proceed",
+        "image": "path/to/image2.jpg",
+        "url": "https://www.youtube.com/watch?v=EXAMPLE2"
+    },
+    {
+        "id": "3",
+        "title": "Download Extension",
+        "description": "Complete this step to unlock the link",
+        "image": "path/to/image3.jpg",
+        "url": "https://www.example.com/download"
+    }
+]
