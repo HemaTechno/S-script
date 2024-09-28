@@ -200,12 +200,7 @@
             }, 3000); // عرض الإشعار لمدة 3 ثواني
         }
 
-        // التحقق إذا كانت المهمة قد تمت عند إعادة تحميل الصفحة
-        window.addEventListener('load', () => {
-            if (localStorage.getItem('stepCompleted')) {
-                alert('لقد أكملت المهمة بالفعل!');
-            }
-        });
+        
 
         // الحصول على المعرف من الرابط
         const params = new URLSearchParams(window.location.search);
