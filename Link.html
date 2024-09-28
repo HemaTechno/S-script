@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6A329F;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .button {
+            width: 300px;
+            padding: 15px;
+            margin: 10px;
+            background-color: #FF4E42;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .button[disabled] {
+            background-color: #444;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            width: 80%;
+            margin: 20px auto;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #4CAF50;
+        }
+
+        #unlockButton {
+            background-color: #6200EA;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Complete the actions and unlock the link</h1>
+    <div id="actionButtons"></div>
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <button id="unlockButton" class="button">Unlock Content</button>
+
+    <script>
+        let progress = 0;
+        let currentStep = 0;
+        const progressBar = document.getElementById('progressBar');
+        const unlockButton = document.getElementById('unlockButton');
+        const actionButtonsContainer = document.getElementById('actionButtons');
+
+        fetch('links.json')
+            .then(response => response.json())
+            .then(data => {
+                const steps = data.steps;
+
+                // Create buttons for each step
+                steps.forEach((step, index) => {
+                    const button = document.createElement('button');
+                    button.classList.add('button');
+                    button.textContent = step.text;
+                    button.disabled = index !== 0; // Enable the first button, disable the rest
+                    button.addEventListener('click', () => handleAction(step, index));
+                    actionButtonsContainer.appendChild(button);
+                });
+
+                // Unlock button setup
+                unlockButton.textContent = data.unlock.text;
+                unlockButton.addEventListener('click', () => {
+                    window.location.href = data.unlock.link;
+                });
+            })
+            .catch(error => console.error('Error loading data:', error));
+
+        function handleAction(step, index) {
+            window.open(step.action, '_blank'); // Open action link in new tab
+
+            const buttons = document.querySelectorAll('.button');
+            buttons[index].disabled = true;
+
+            // Simulate loading time (3 seconds)
+            setTimeout(() => {
+                // Update progress bar
+                progress += 100 / buttons.length;
+                progressBar.style.width = progress + '%';
+
+                // Enable the next button if available
+                if (buttons[index + 1]) {
+                    buttons[index + 1].disabled = false;
+                } else {
+                    // If it's the last step, show unlock button
+                    unlockButton.style.display = 'inline-block';
+                }
+            }, 3000); // 3 seconds delay
+        }
+    </script>
+
+</body>
+</html>
