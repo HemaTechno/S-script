@@ -3,99 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="صفحة تحتوي على روابط قابلة للفتح بعد تنفيذ إجراءات محددة.">
     <title>Unlock Content</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #1a1e27;
+            color: #fff;
             text-align: center;
             padding: 20px;
         }
-        .button-container {
-            margin-top: 20px;
+        .step {
+            background-color: #333;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
         }
-        .step-button {
-            display: block;
+        .step h2 {
+            margin-bottom: 10px;
+        }
+        .step button {
+            padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
-            padding: 15px;
-            margin: 10px 0;
             border: none;
-            cursor: pointer;
             border-radius: 5px;
-            font-size: 16px;
+            cursor: pointer;
         }
-        .step-button:disabled {
-            background-color: #ddd;
+        .step button:disabled {
+            background-color: #555;
             cursor: not-allowed;
         }
-        .image-container {
-            margin: 20px 0;
+        .progress-bar {
+            width: 80%;
+            background-color: #555;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px auto;
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
     <h1>Unlock Content</h1>
-    <div id="content-container"></div>
+
+    <div id="steps-container"></div>
+
+    <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+    </div>
+
+    <button id="unlock-button" disabled>Unlock Content</button>
 
     <script>
-        let currentStep = 0;
         let steps = [];
+        let completedSteps = 0;
 
         // تحميل البيانات من ملف JSON
         fetch('links.json')
             .then(response => response.json())
             .then(data => {
                 steps = data;
-                renderButtons();
+                renderSteps();
             })
             .catch(error => console.error('Error loading data:', error));
 
-        function renderButtons() {
-            const contentContainer = document.getElementById('content-container');
+        function renderSteps() {
+            const container = document.getElementById('steps-container');
+
             steps.forEach((step, index) => {
-                // إنشاء الأزرار لكل خطوة
+                const stepDiv = document.createElement('div');
+                stepDiv.classList.add('step');
+
+                const title = document.createElement('h2');
+                title.textContent = step.title;
+
+                const description = document.createElement('p');
+                description.textContent = step.description;
+
                 const button = document.createElement('button');
-                button.classList.add('step-button');
-                button.textContent = step.title;
-                button.disabled = index > 0;
+                button.textContent = "Complete Action";
+                button.disabled = index > 0; // تعطيل الأزرار إلا الأول
                 button.setAttribute('data-url', step.url);
                 button.setAttribute('data-index', index);
-                button.onclick = handleClick;
+                button.onclick = handleAction;
 
-                contentContainer.appendChild(button);
+                stepDiv.appendChild(title);
+                stepDiv.appendChild(description);
+                stepDiv.appendChild(button);
 
-                // إنشاء مساحة لعرض الصور
-                const imgContainer = document.createElement('div');
-                imgContainer.classList.add('image-container');
-                imgContainer.innerHTML = `<img src="${step.image}" alt="${step.title}" width="300">`;
-                contentContainer.appendChild(imgContainer);
+                container.appendChild(stepDiv);
             });
         }
 
-        function handleClick(event) {
+        function handleAction(event) {
             const button = event.target;
             const index = parseInt(button.getAttribute('data-index'), 10);
+            const url = button.getAttribute('data-url');
 
-            // تعطيل الزر الحالي
+            // فتح الرابط في نافذة جديدة أو تطبيق
+            window.location.href = url;
+
+            // تحديث حالة الخطوة الحالية على أنها مكتملة
+            steps[index].completed = true;
             button.disabled = true;
 
-            // تفعيل الزر التالي بعد ثواني معينة
+            // تفعيل الزر التالي
             if (index + 1 < steps.length) {
-                setTimeout(() => {
-                    const nextButton = document.querySelector(`button[data-index="${index + 1}"]`);
-                    if (nextButton) {
-                        nextButton.disabled = false;
-                    }
-                }, 3000); // 3 ثواني
+                const nextButton = document.querySelector(`button[data-index="${index + 1}"]`);
+                nextButton.disabled = false;
             }
 
-            // فتح الرابط المحدد
-            const url = button.getAttribute('data-url');
-            window.location.href = `vnd.youtube:${url}`;
+            // تحديث الشريط التقدمي
+            completedSteps++;
+            updateProgress();
+
+            // تفعيل زر فتح المحتوى بعد اكتمال جميع الخطوات
+            if (completedSteps === steps.length) {
+                document.getElementById('unlock-button').disabled = false;
+            }
+        }
+
+        function updateProgress() {
+            const progress = (completedSteps / steps.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
         }
     </script>
 
