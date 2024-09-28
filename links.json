@@ -1,23 +1,14 @@
-[
-    {
-        "id": "1",
-        "title": "Subscribe & Turn Notifications On",
-        "description": "Complete this action to unlock the next step.",
-        "url": "https://www.youtube.com/watch?v=EXAMPLE1",
-        "completed": false
-    },
-    {
-        "id": "2",
-        "title": "Like & Comment",
-        "description": "Complete this action to unlock the next step.",
-        "url": "https://www.youtube.com/watch?v=EXAMPLE2",
-        "completed": false
-    },
-    {
-        "id": "3",
-        "title": "Download Extension",
-        "description": "Complete this action to unlock the content.",
-        "url": "https://www.example.com/download",
-        "completed": false
-    }
-]
+{
+  "1": {
+    "title": "عنوان الصفحة 1",
+    "description": "هذا هو الوصف للصفحة 1",
+    "image": "image1.jpg",
+    "videoId": "dQw4w9WgXcQ"
+  },
+  "2": {
+    "title": "عنوان الصفحة 2",
+    "description": "هذا هو الوصف للصفحة 2",
+    "image": "image2.jpg",
+    "videoId": "e9vrfEoc8_g"
+  }
+}
