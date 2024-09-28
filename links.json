@@ -1,14 +1,28 @@
 {
   "1": {
-    "title": "عنوان الصفحة 1",
-    "description": "هذا هو الوصف للصفحة 1",
-    "image": "image1.jpg",
-    "videoId": "dQw4w9WgXcQ"
-  },
-  "2": {
-    "title": "عنوان الصفحة 2",
-    "description": "هذا هو الوصف للصفحة 2",
-    "image": "image2.jpg",
-    "videoId": "e9vrfEoc8_g"
+    "title": "Rivals",
+    "description": "Complete the actions and unlock the link.",
+    "image": "rivals_image.jpg",
+    "steps": [
+      {
+        "title": "Subscribe & Turn Notifications On",
+        "type": "youtube",
+        "videoId": "dQw4w9WgXcQ",
+        "status": false
+      },
+      {
+        "title": "Like & Comment",
+        "type": "youtube",
+        "videoId": "dQw4w9WgXcQ",
+        "status": false
+      },
+      {
+        "title": "Download Extension",
+        "type": "link",
+        "url": "https://example.com/extension",
+        "status": false
+      }
+    ],
+    "finalLink": "https://final-link.com"
   }
 }
