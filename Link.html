@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="صفحة ديناميكية تعتمد على معرف">
-    <title>Dynamic Page</title>
+    <title>Unlock Content</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,9 +12,27 @@
             text-align: center;
             padding: 20px;
         }
-        img {
-            width: 300px;
-            height: auto;
+        .step {
+            background-color: #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .step.completed {
+            background-color: #8bc34a;
+        }
+        .step button {
+            margin-top: 10px;
+        }
+        #unlockButton {
+            background-color: #6200ea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: none;
         }
     </style>
 </head>
@@ -23,33 +40,67 @@
 
     <h1 id="title">جاري التحميل...</h1>
     <p id="description">جاري التحميل...</p>
-    <img id="image" src="" alt="Image" />
-    <iframe id="video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    <div id="stepsContainer"></div>
+    <button id="unlockButton">افتح المحتوى</button>
 
     <script>
+        let stepsCompleted = 0;
+
+        // تحميل البيانات بناءً على المعرف من الرابط
         function loadContent(id) {
             fetch('links.json')
                 .then(response => response.json())
                 .then(data => {
-                    if (data[id]) {
-                        document.getElementById('title').textContent = data[id].title;
-                        document.getElementById('description').textContent = data[id].description;
-                        document.getElementById('image').src = data[id].image;
-                        document.getElementById('video').src = `https://www.youtube.com/embed/${data[id].videoId}`;
+                    const content = data[id];
+                    if (content) {
+                        document.getElementById('title').textContent = content.title;
+                        document.getElementById('description').textContent = content.description;
+                        loadSteps(content.steps, content.finalLink);
                     } else {
-                        document.getElementById('title').textContent = 'لم يتم العثور على المحتوى';
+                        document.getElementById('title').textContent = 'المحتوى غير موجود';
                         document.getElementById('description').textContent = '';
                     }
                 })
                 .catch(error => {
-                    document.getElementById('title').textContent = 'خطأ في تحميل البيانات';
-                    console.error('Error fetching data:', error);
+                    console.error('خطأ في تحميل البيانات:', error);
                 });
+        }
+
+        // تحميل الخطوات والتفاعل معها
+        function loadSteps(steps, finalLink) {
+            const stepsContainer = document.getElementById('stepsContainer');
+            steps.forEach((step, index) => {
+                const stepDiv = document.createElement('div');
+                stepDiv.classList.add('step');
+                stepDiv.innerHTML = `<h3>${step.title}</h3>`;
+
+                const button = document.createElement('button');
+                button.textContent = "إكمال الخطوة";
+                button.addEventListener('click', () => completeStep(stepDiv, button, step, steps.length, finalLink));
+                stepDiv.appendChild(button);
+                stepsContainer.appendChild(stepDiv);
+            });
+        }
+
+        // إكمال خطوة
+        function completeStep(stepDiv, button, step, totalSteps, finalLink) {
+            stepDiv.classList.add('completed');
+            button.disabled = true;
+            stepsCompleted++;
+
+            // إذا أكمل جميع الخطوات، عرض زر فتح المحتوى
+            if (stepsCompleted === totalSteps) {
+                const unlockButton = document.getElementById('unlockButton');
+                unlockButton.style.display = 'block';
+                unlockButton.addEventListener('click', () => {
+                    window.location.href = finalLink;
+                });
+            }
         }
 
         // الحصول على المعرف من الرابط
         const params = new URLSearchParams(window.location.search);
-        const id = params.get('id') || '1'; // استخدام المعرف "1" كقيمة افتراضية إذا لم يتم توفيره
+        const id = params.get('id') || '1';  // افتراضي إلى "1" إذا لم يتم توفير معرف
         loadContent(id);
     </script>
 
