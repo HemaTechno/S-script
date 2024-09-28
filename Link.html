@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unlock Content</title>
     <style>
-        /* تحسين وتجميل الاستايل */
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #121212;
@@ -88,7 +87,6 @@
             border-radius: 12px;
         }
 
-        /* استايل الإشعار */
         #notification {
             position: fixed;
             bottom: 20px;
@@ -111,7 +109,6 @@
     <div id="stepsContainer"></div>
     <button id="unlockButton">افتح المحتوى</button>
 
-    <!-- إشعار -->
     <div id="notification">تمت المهمة! انتقل إلى المهمة القادمة.</div>
 
     <script>
@@ -166,6 +163,10 @@
             button.disabled = true;
             button.textContent = "جاري إتمام المهمة...";
 
+            // حفظ التقدم في LocalStorage
+            localStorage.setItem('step' + stepsCompleted, 'completed');
+
+            // بعد 8 ثواني، إعادة التوجيه وتنفيذ المهمة
             setTimeout(() => {
                 stepDiv.classList.add('completed');
                 button.textContent = "تمت المهمة";
@@ -190,6 +191,10 @@
                     window.location.href = step.url;
                 }
 
+                // عند العودة إلى الصفحة، يعرف المستخدم أنه أكمل المهمة.
+                button.textContent = "تمت المهمة";
+                localStorage.setItem('stepCompleted', true);
+
             }, 8000); // تأخير لمدة 8 ثواني
         }
 
@@ -201,6 +206,13 @@
                 notification.style.display = 'none';
             }, 3000); // عرض الإشعار لمدة 3 ثواني
         }
+
+        // التحقق إذا كانت المهمة قد تمت عند إعادة تحميل الصفحة
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('stepCompleted')) {
+                alert('لقد أكملت المهمة بالفعل!');
+            }
+        });
 
         // الحصول على المعرف من الرابط
         const params = new URLSearchParams(window.location.search);
