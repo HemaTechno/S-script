@@ -5,40 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unlock Content</title>
     <style>
+        /* تحسين وتجميل الاستايل */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Cairo', sans-serif;
+            background-color: #121212;
+            color: #fff;
             text-align: center;
             padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
+        h1, p {
+            margin-bottom: 20px;
+        }
+
+        #stepsContainer {
+            width: 100%;
+            max-width: 600px;
+        }
+
         .step {
-            background-color: #ddd;
-            padding: 15px;
+            background-color: #1e1e1e;
+            padding: 20px;
             margin: 10px 0;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
         }
+
+        .step:hover {
+            background-color: #333;
+            transform: translateY(-5px);
+        }
+
         .step.completed {
-            background-color: #8bc34a;
+            background-color: #4caf50;
         }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
         .step button {
-            margin-top: 10px;
-        }
-        #unlockButton {
             background-color: #6200ea;
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .step button:hover {
+            background-color: #4a00c8;
+        }
+
+        #unlockButton {
+            background-color: #03dac5;
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            margin-top: 30px;
             cursor: pointer;
             display: none;
+        }
+
+        #unlockButton:hover {
+            background-color: #00bfa5;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
         }
     </style>
 </head>
 <body>
 
     <h1 id="title">جاري التحميل...</h1>
+    <img id="image" src="" alt="Image" style="display:none;">
     <p id="description">جاري التحميل...</p>
     <div id="stepsContainer"></div>
     <button id="unlockButton">افتح المحتوى</button>
@@ -55,6 +109,14 @@
                     if (content) {
                         document.getElementById('title').textContent = content.title;
                         document.getElementById('description').textContent = content.description;
+
+                        // عرض الصورة
+                        if (content.image) {
+                            const image = document.getElementById('image');
+                            image.src = content.image;
+                            image.style.display = 'block';
+                        }
+
                         loadSteps(content.steps, content.finalLink);
                     } else {
                         document.getElementById('title').textContent = 'المحتوى غير موجود';
@@ -76,14 +138,21 @@
 
                 const button = document.createElement('button');
                 button.textContent = "إكمال الخطوة";
-                button.addEventListener('click', () => completeStep(stepDiv, button, step, steps.length, finalLink));
+                button.addEventListener('click', () => redirectToLink(stepDiv, button, step, steps.length, finalLink));
                 stepDiv.appendChild(button);
                 stepsContainer.appendChild(stepDiv);
             });
         }
 
-        // إكمال خطوة
-        function completeStep(stepDiv, button, step, totalSteps, finalLink) {
+        // إعادة توجيه إلى الرابط المرتبط بالخطوة
+        function redirectToLink(stepDiv, button, step, totalSteps, finalLink) {
+            // يتم إعادة توجيه المستخدم للرابط المرتبط بالخطوة
+            if (step.type === 'youtube') {
+                window.location.href = `https://www.youtube.com/watch?v=${step.videoId}`;
+            } else if (step.type === 'link') {
+                window.location.href = step.url;
+            }
+
             stepDiv.classList.add('completed');
             button.disabled = true;
             stepsCompleted++;
