@@ -3,136 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlock Content</title>
+    <meta name="description" content="صفحة ديناميكية تعتمد على معرف">
+    <title>Dynamic Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1e27;
-            color: #fff;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             text-align: center;
             padding: 20px;
         }
-        .step {
-            background-color: #333;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        .step h2 {
-            margin-bottom: 10px;
-        }
-        .step button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .step button:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-        }
-        .progress-bar {
-            width: 80%;
-            background-color: #555;
-            height: 10px;
-            border-radius: 5px;
-            margin: 20px auto;
-        }
-        .progress {
-            width: 0%;
-            height: 100%;
-            background-color: #4CAF50;
-            border-radius: 5px;
+        img {
+            width: 300px;
+            height: auto;
         }
     </style>
 </head>
 <body>
 
-    <h1>Unlock Content</h1>
-
-    <div id="steps-container"></div>
-
-    <div class="progress-bar">
-        <div id="progress" class="progress"></div>
-    </div>
-
-    <button id="unlock-button" disabled>Unlock Content</button>
+    <h1 id="title">جاري التحميل...</h1>
+    <p id="description">جاري التحميل...</p>
+    <img id="image" src="" alt="Image" />
+    <iframe id="video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
 
     <script>
-        let steps = [];
-        let completedSteps = 0;
-
-        // تحميل البيانات من ملف JSON
-        fetch('links.json')
-            .then(response => response.json())
-            .then(data => {
-                steps = data;
-                renderSteps();
-            })
-            .catch(error => console.error('Error loading data:', error));
-
-        function renderSteps() {
-            const container = document.getElementById('steps-container');
-
-            steps.forEach((step, index) => {
-                const stepDiv = document.createElement('div');
-                stepDiv.classList.add('step');
-
-                const title = document.createElement('h2');
-                title.textContent = step.title;
-
-                const description = document.createElement('p');
-                description.textContent = step.description;
-
-                const button = document.createElement('button');
-                button.textContent = "Complete Action";
-                button.disabled = index > 0; // تعطيل الأزرار إلا الأول
-                button.setAttribute('data-url', step.url);
-                button.setAttribute('data-index', index);
-                button.onclick = handleAction;
-
-                stepDiv.appendChild(title);
-                stepDiv.appendChild(description);
-                stepDiv.appendChild(button);
-
-                container.appendChild(stepDiv);
-            });
+        function loadContent(id) {
+            fetch('links.json')
+                .then(response => response.json())
+                .then(data => {
+                    if (data[id]) {
+                        document.getElementById('title').textContent = data[id].title;
+                        document.getElementById('description').textContent = data[id].description;
+                        document.getElementById('image').src = data[id].image;
+                        document.getElementById('video').src = `https://www.youtube.com/embed/${data[id].videoId}`;
+                    } else {
+                        document.getElementById('title').textContent = 'لم يتم العثور على المحتوى';
+                        document.getElementById('description').textContent = '';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('title').textContent = 'خطأ في تحميل البيانات';
+                    console.error('Error fetching data:', error);
+                });
         }
 
-        function handleAction(event) {
-            const button = event.target;
-            const index = parseInt(button.getAttribute('data-index'), 10);
-            const url = button.getAttribute('data-url');
-
-            // فتح الرابط في نافذة جديدة أو تطبيق
-            window.location.href = url;
-
-            // تحديث حالة الخطوة الحالية على أنها مكتملة
-            steps[index].completed = true;
-            button.disabled = true;
-
-            // تفعيل الزر التالي
-            if (index + 1 < steps.length) {
-                const nextButton = document.querySelector(`button[data-index="${index + 1}"]`);
-                nextButton.disabled = false;
-            }
-
-            // تحديث الشريط التقدمي
-            completedSteps++;
-            updateProgress();
-
-            // تفعيل زر فتح المحتوى بعد اكتمال جميع الخطوات
-            if (completedSteps === steps.length) {
-                document.getElementById('unlock-button').disabled = false;
-            }
-        }
-
-        function updateProgress() {
-            const progress = (completedSteps / steps.length) * 100;
-            document.getElementById('progress').style.width = `${progress}%`;
-        }
+        // الحصول على المعرف من الرابط
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id') || '1'; // استخدام المعرف "1" كقيمة افتراضية إذا لم يتم توفيره
+        loadContent(id);
     </script>
 
 </body>
