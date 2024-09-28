@@ -1,23 +1,28 @@
 {
-  "steps": [
-    {
-      "id": 1,
-      "text": "Subscribe & Turn Notifications On",
-      "action": "https://www.youtube.com/subscribe_link"
-    },
-    {
-      "id": 2,
-      "text": "Like & Comment",
-      "action": "https://www.youtube.com/comment_link"
-    },
-    {
-      "id": 3,
-      "text": "Download Extension",
-      "action": "https://download_extension_link"
-    }
-  ],
-  "unlock": {
-    "text": "Unlock content",
-    "link": "https://final_unlock_link"
-  }
+    "actions": [
+        {
+            "id": "action1",
+            "title": "Subscribe & Turn Notifications On",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE1",
+            "waitTime": 5000
+        },
+        {
+            "id": "action2",
+            "title": "Like & Comment",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE2",
+            "waitTime": 5000
+        },
+        {
+            "id": "action3",
+            "title": "Download Extension",
+            "url": "https://www.example.com/extension",
+            "waitTime": 5000
+        },
+        {
+            "id": "unlock",
+            "title": "Unlock content",
+            "url": "https://www.example.com/unlock",
+            "waitTime": 0
+        }
+    ]
 }
