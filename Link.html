@@ -3,97 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlock Page</title>
+    <meta name="description" content="صفحة تحتوي على روابط قابلة للفتح بعد تنفيذ إجراءات محددة.">
+    <title>Unlock Content</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
+            color: #333;
             text-align: center;
             padding: 20px;
         }
-        .action-button {
-            background-color: #007bff;
+        .button-container {
+            margin-top: 20px;
+        }
+        .step-button {
+            display: block;
+            background-color: #4CAF50;
             color: white;
             padding: 15px;
+            margin: 10px 0;
             border: none;
-            margin: 10px;
-            font-size: 18px;
             cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        .disabled {
-            background-color: #ccc;
+        .step-button:disabled {
+            background-color: #ddd;
             cursor: not-allowed;
         }
-        .progress {
+        .image-container {
             margin: 20px 0;
-            height: 20px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            background-color: #007bff;
-            width: 0%;
-            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <h1>Complete the actions to unlock the content</h1>
-    <div id="actionButtons"></div>
-    <div class="progress">
-        <div id="progressBar" class="progress-bar"></div>
-    </div>
+    <h1>Unlock Content</h1>
+    <div id="content-container"></div>
 
     <script>
-        let progress = 0;
-        const progressBar = document.getElementById('progressBar');
+        let currentStep = 0;
+        let steps = [];
 
-        function updateProgress() {
-            progress += 33.3;
-            progressBar.style.width = progress + '%';
-        }
-
-        function disableButton(button) {
-            button.classList.add('disabled');
-            button.disabled = true;
-        }
-
-        function openLink(url) {
-            const openInAppUrl = "intent:" + url + "#Intent;package=com.google.android.youtube;end;";
-            window.location.href = openInAppUrl;
-        }
-
-        function createButtons(actions) {
-            const actionButtons = document.getElementById('actionButtons');
-
-            actions.forEach(action => {
-                const button = document.createElement('button');
-                button.classList.add('action-button');
-                button.textContent = action.title;
-                button.addEventListener('click', function() {
-                    if (!button.disabled) {
-                        disableButton(button);
-                        updateProgress();
-                        setTimeout(() => {
-                            openLink(action.url);
-                        }, action.waitTime);
-                    }
-                });
-                actionButtons.appendChild(button);
-            });
-        }
-
+        // تحميل البيانات من ملف JSON
         fetch('links.json')
             .then(response => response.json())
             .then(data => {
-                createButtons(data.actions);
+                steps = data;
+                renderButtons();
             })
-            .catch(error => {
-                console.error('Error loading actions:', error);
+            .catch(error => console.error('Error loading data:', error));
+
+        function renderButtons() {
+            const contentContainer = document.getElementById('content-container');
+            steps.forEach((step, index) => {
+                // إنشاء الأزرار لكل خطوة
+                const button = document.createElement('button');
+                button.classList.add('step-button');
+                button.textContent = step.title;
+                button.disabled = index > 0;
+                button.setAttribute('data-url', step.url);
+                button.setAttribute('data-index', index);
+                button.onclick = handleClick;
+
+                contentContainer.appendChild(button);
+
+                // إنشاء مساحة لعرض الصور
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('image-container');
+                imgContainer.innerHTML = `<img src="${step.image}" alt="${step.title}" width="300">`;
+                contentContainer.appendChild(imgContainer);
             });
+        }
+
+        function handleClick(event) {
+            const button = event.target;
+            const index = parseInt(button.getAttribute('data-index'), 10);
+
+            // تعطيل الزر الحالي
+            button.disabled = true;
+
+            // تفعيل الزر التالي بعد ثواني معينة
+            if (index + 1 < steps.length) {
+                setTimeout(() => {
+                    const nextButton = document.querySelector(`button[data-index="${index + 1}"]`);
+                    if (nextButton) {
+                        nextButton.disabled = false;
+                    }
+                }, 3000); // 3 ثواني
+            }
+
+            // فتح الرابط المحدد
+            const url = button.getAttribute('data-url');
+            window.location.href = `vnd.youtube:${url}`;
+        }
     </script>
 
 </body>
