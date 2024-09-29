@@ -39,6 +39,7 @@
             width: 100%;
             height: 200px; /* تعديل مقاس الصورة ليكون مستطيلاً */
             object-fit: cover; /* لضمان أن الصورة تظهر بالكامل مع اقتصاص من الجوانب عند الحاجة */
+            cursor: pointer; /* جعل المؤشر يظهر كأنه قابل للنقر */
         }
         .card-content {
             padding: 20px;
@@ -101,8 +102,11 @@
                 const card = document.createElement('div');
                 card.classList.add('card');
 
+                // Create an anchor element around the image
                 card.innerHTML = `
-                    <img src="${item.imageUrl}" alt="${item.title}">
+                    <a href="page.html?id=${item.id}">
+                        <img src="${item.imageUrl}" alt="${item.title}">
+                    </a>
                     <div class="card-content">
                         <div class="meta">
                             <span>${item.category}</span>
