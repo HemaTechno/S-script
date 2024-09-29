@@ -1,26 +1,22 @@
 [
     {
         "id": "1",
-        "title": "اقوي سكربت بلوكس فروت",
-        "description": "هذا السكربت يساعدك في تنفيذ المهام بشكل أسرع.",
-        "videoId": "XnVZhjN-ZXY",  
-        "scriptText": "print('Hello, Roblox!')",  
-        "imageUrl": "https://i.ibb.co/BqTL2M8/20240929-101624.png"
+        "title": "Rivals",
+        "description": "Understanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+        "category": "Scripts",
+        "date": "September 29, 2024",
+        "imageUrl": "https://i.ibb.co/BqTL2M8/20240929-101624.png",
+        "author": "HemaTech",
+        "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg"
     },
     {
         "id": "2",
-        "title": "سكربت روبلوكس رقم 2",
-        "description": "هذا السكربت يوفر لك العديد من الأدوات لتخصيص اللعبة.",
-        "videoId": "A8P59fHBZfM", 
-        "scriptText": "game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100",
-        "imageUrl": "https://example.com/image2.jpg"
-    },
-    {
-        "id": "3",
-        "title": "سكربت روبلوكس رقم 3",
-        "description": "هذا السكربت يتيح لك الحصول على موارد غير محدودة.",
-        "videoId": "b60nnLxsOuc",
-        "scriptText": "while true do wait() print('Infinite resources') end",
-        "imageUrl": "https://example.com/image3.jpg"
+        "title": "Another Script",
+        "description": "A brief description of another script.",
+        "category": "Scripts",
+        "date": "September 5, 2024",
+        "imageUrl": "another-image-url.jpg",
+        "author": "SomeUser",
+        "authorImage": "another-author-avatar-url.jpg"
     }
 ]
