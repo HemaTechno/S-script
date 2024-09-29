@@ -22,5 +22,17 @@
         "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
         "videoUrl": "https://youtu.be/dOO3vMNv8XU",
         "script": "loadstring(game:HttpGet('https://overdrive-h.ohd.workers.dev/?d=loader'))()"
+    },
+    {
+    "id": "3",
+    "title": "cokka Hub | Bloxfruit",
+    "description": "Understanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Bloxfruits",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZPgDtR.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/HHUACqAoS_o",
+    "script": "loadstring(game:HttpGet\"https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua\")()"
     }
 ]
