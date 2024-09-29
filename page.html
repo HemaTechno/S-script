@@ -6,17 +6,24 @@
     <meta name="description" content="عرض تفاصيل السكربتات والفيديوهات.">
     <title>تفاصيل السكربت</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #1a1e27;
             color: #fff;
+            text-align: right;
             padding: 20px;
             direction: rtl;
         }
         .video-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #2c3140;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
         }
         iframe {
@@ -24,7 +31,6 @@
             height: 400px; /* يمكنك تغيير الارتفاع حسب الحاجة */
             border: none;
             border-radius: 8px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
         }
         .script-container {
             background-color: #2c3140;
