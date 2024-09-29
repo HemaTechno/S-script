@@ -59,12 +59,28 @@
         button:hover {
             background-color: #0056b3;
         }
+        .author-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .author-image {
+            border-radius: 50%;
+            width: 40px; /* عرض الصورة */
+            height: 40px; /* ارتفاع الصورة */
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="video-container">
-        <h1>عرض الفيديو</h1>
+        <h1 id="videoTitle">عرض الفيديو</h1>
+        <p id="videoDescription"></p>
+        <div class="author-container">
+            <img id="authorImage" class="author-image" src="" alt="صورة المؤلف">
+            <span id="authorName"></span>
+        </div>
         <iframe id="videoPlayer" src="" allowfullscreen></iframe>
     </div>
 
@@ -85,6 +101,14 @@
             .then(data => {
                 const scriptData = data.find(item => item.id === id);
                 if (scriptData) {
+                    // إعداد عنوان الفيديو والوصف
+                    document.getElementById('videoTitle').textContent = scriptData.title;
+                    document.getElementById('videoDescription').textContent = scriptData.description;
+
+                    // إعداد معلومات المؤلف
+                    document.getElementById('authorImage').src = scriptData.authorImage;
+                    document.getElementById('authorName').textContent = scriptData.author;
+
                     // إعداد الفيديو
                     const videoPlayer = document.getElementById('videoPlayer');
                     videoPlayer.src = `https://www.youtube.com/embed/${scriptData.videoUrl.split('/').pop()}`;
