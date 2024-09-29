@@ -1,17 +1,17 @@
 [
     {
         "id": "1",
-        "title": "سكربت روبلوكس رقم 1",
+        "title": "اقوي سكربت بلوكس فروت",
         "description": "هذا السكربت يساعدك في تنفيذ المهام بشكل أسرع.",
-        "videoId": "XnVZhjN-ZXY",  // ضع معرف الفيديو من رابط YouTube هنا
-        "scriptText": "print('Hello, Roblox!')",  // السكربت الذي سيظهر في صفحة التفاصيل
-        "imageUrl": "https://example.com/image1.jpg"  // رابط الصورة المصغرة للفيديو
+        "videoId": "XnVZhjN-ZXY",  
+        "scriptText": "print('Hello, Roblox!')",  
+        "imageUrl": "https://i.ibb.co/BqTL2M8/20240929-101624.png"
     },
     {
         "id": "2",
         "title": "سكربت روبلوكس رقم 2",
         "description": "هذا السكربت يوفر لك العديد من الأدوات لتخصيص اللعبة.",
-        "videoId": "A8P59fHBZfM",  // ضع معرف الفيديو من رابط YouTube هنا
+        "videoId": "A8P59fHBZfM", 
         "scriptText": "game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100",
         "imageUrl": "https://example.com/image2.jpg"
     },
