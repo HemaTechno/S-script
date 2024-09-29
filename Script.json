@@ -34,5 +34,17 @@
     "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
     "videoUrl": "https://youtu.be/HHUACqAoS_o",
     "script": "loadstring(game:HttpGet\"https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua\")()"
+    },
+    {
+    "id": "4",
+    "title": "SymphonyHub",
+    "description": "Understanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Mm2",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZPQ8CJ.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/HHUACqAoS_o",
+    "script": "loadstring(game:HttpGet('https://raw.githubusercontent.com/ThatSick/ArrayField/main/SymphonyHub.lua'))()"
     }
 ]
