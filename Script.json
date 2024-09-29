@@ -83,5 +83,41 @@
     "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
     "videoUrl": "https://youtu.be/HHUACqAoS_o",
     "script": "loadstring(game:HttpGet('https://raw.githubusercontent.com/ThatSick/ArrayField/main/SymphonyHub.lua'))()"
+    },
+    {
+    "id": "8",
+    "title": "ScriptsBlox",
+    "description": "\nUnderstanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Bloxfruits",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZQnGHl.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/ksKNvxrXvWc",
+    "script": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Script-Blox/Script/main/Script-Blox\"))()"
+    },
+    {
+    "id": "9",
+    "title": "REDzHUB",
+    "description": "\nUnderstanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Brookhaven ",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZQTIjV.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/GqRKJR_4tw8",
+    "script": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/REDzHUB/REDzHUB/main/REDzHUB\"))()"
+    },
+    {
+    "id": "10",
+    "title": "XHUB",
+    "description": "\nUnderstanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Mm2",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZQ5gbj.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/ZgxFwAkZHlQ",
+    "script": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2\"))()"
     }
-]
+        ]
