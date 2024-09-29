@@ -47,6 +47,19 @@
     "videoUrl": "https://youtu.be/WXVqzRm9edA",
     "script": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/daucobonhi/seagame/main/Damonvip.lua\"))()"
     },
+    
+{
+    "id": "6",
+    "title": "HoHo",
+    "description": "\nUnderstanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Bloxfruits",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZijZPa.jpg",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/9JxsEoft6Rw",
+    "script": "_G.HohoVersion = \"v3\"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
+},
     {
     "id": "4",
     "title": "SymphonyHub",
