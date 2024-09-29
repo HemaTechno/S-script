@@ -1,5 +1,17 @@
 [
     {
+    "id": "7",
+    "title": "AnDepZaiHub",
+    "description": "\nUnderstanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
+    "category": "Bloxfruits",
+    "date": "2024-09-29",
+    "imageUrl": "https://iili.io/dZiU6Ab.png",
+    "author": "Hema Tech ",
+    "authorImage": "https://i.ibb.co/FVr4b2z/20240926-203252.jpg",
+    "videoUrl": "https://youtu.be/9JxsEoftRw",
+    "script": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/AnDepZaiHub/AnDepZaiHubBeta/main/AnDepZaiHubBeta.lua\"))() "
+    },
+        {
         "id": "1",
         "title": "TsuoHub",
         "description": "Understanding Lua: Lua is the primary language used for scripting in Roblox. It's relatively easy to learn, especially for beginners.",
