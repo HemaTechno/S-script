@@ -21,5 +21,8 @@
         "imageUrl": "another-image-url.jpg",
         "author": "SomeUser",
         "authorImage": "another-author-avatar-url.jpg"
+   "videoUrl": "https://www.youtube.com/embed/yyyyyyyyy",
+        "script": "كود السكربت الثاني هنا"
+  
     }
 ]
