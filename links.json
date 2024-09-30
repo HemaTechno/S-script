@@ -33,13 +33,13 @@
       {
         "title": "Subscribe",
         "type": "link",
-        "videoId": "https://youtube.com/@hema_tech1?si=45uHYXeqVs2uO3JV",
+        "videoId": "hema_tech1",
         "status": false
       },
       {
         "title": "Like & Comment",
         "type": "youtube",
-        "videoId": "https://youtu.be/4S0MfHFy1fg",
+        "videoId": "4S0MfHFy1fg",
         "status": false
       },
       {
